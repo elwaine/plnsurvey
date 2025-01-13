@@ -6,10 +6,10 @@ Color kWhiteColor = Color(0xffFFFFFF);
 Color kGreyColor = Color(0xff9698A9);
 Color kGreenColor = Color(0xff0EC3AE);
 Color kRedColor = Color(0xFFE870A5);
-Color kPrimaryColor = Color.fromRGBO(75, 191, 250, 1);
-Color kSecondaryColor = Color.fromRGBO(194, 234, 255, 1);
+Color kPrimaryColor = Color(0xff4DC3DE);
+Color kSecondaryColor = Color(0xffC2EAFF);
 Color kInactiveColor = Color(0xffDBD7EC);
-Color kLoginFontColor = Color(0xff2D779D);
+Color kLoginFontColor = Color(0xff33A2CC);
 Color kTrsnsparentColor = Colors.transparent;
 Gradient kPrimaryBackground = LinearGradient(
   colors: [kPrimaryColor, kSecondaryColor],

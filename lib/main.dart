@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         '/': (context) => SplashScreen(),
+        '/login-form': (context) => Login(),
       },
     );
   }

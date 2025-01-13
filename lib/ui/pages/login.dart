@@ -43,12 +43,15 @@ class Login extends StatelessWidget {
             height: 555,
             child: Stack(
               children: [
-                Image.asset(
-                  "assets/loginform.png",
-                  width: 560,
-                  height: 666,
-                  fit: BoxFit.cover,
+                Container(
+                  color: Colors.white,
                 ),
+                // Image.asset(
+                //   "assets/loginform.png",
+                //   width: 560,
+                //   height: 666,
+                //   fit: BoxFit.cover,
+
                 Padding(
                   padding: const EdgeInsets.all(.0),
                   child: Column(
@@ -56,13 +59,14 @@ class Login extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 2),
+                        padding: const EdgeInsets.only(right: 290, bottom: 100),
                         child: Column(
                           children: [
                             Image.asset(
-                              'assets/logopln.png',
-                              height: 217,
-                              width: 375,
+                              'assets/logologin.png',
+                              height: 150,
+                              width: 127,
+                              fit: BoxFit.contain,
                             ),
                           ],
                         ),
