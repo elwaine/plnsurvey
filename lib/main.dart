@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:plnsurvey/ui/pages/dashboard.dart';
 import 'package:plnsurvey/ui/pages/login.dart';
+import 'package:plnsurvey/ui/pages/notif.dart';
+import 'package:plnsurvey/ui/pages/report_survey.dart';
 import 'package:plnsurvey/ui/pages/splash_screen.dart';
 
 void main() => runApp(MyApp());
