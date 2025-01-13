@@ -17,10 +17,12 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Container(
-      width: 105,
-      height: 50,
-      margin: EdgeInsets.all(50),
+      width: screenWidth * 0.2,
+      height: screenHeight * 0.055,
+      margin: EdgeInsets.only(top: 50, left: 15, right: 15),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
@@ -30,12 +32,12 @@ class CustomButton extends StatelessWidget {
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
         ),
-        borderRadius: BorderRadius.circular(30), // Higher radius for pill shape
+        borderRadius: BorderRadius.circular(12),
       ),
       child: TextButton(
         onPressed: onPressed,
         style: TextButton.styleFrom(
-          padding: EdgeInsets.all(5),
+          padding: EdgeInsets.all(2),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),

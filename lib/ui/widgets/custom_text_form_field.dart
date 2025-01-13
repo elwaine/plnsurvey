@@ -16,41 +16,44 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 15, left: 30, right: 20),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text(
-          title,
-          style: blueTextStyle.copyWith(
-            fontWeight: semibold,
-          ),
-        ),
-        SizedBox(
-          height: 6,
-        ),
-        TextFormField(
-          cursorColor: kBlackColor,
-          obscureText: obscureText,
-          decoration: InputDecoration(
-            hintText: hintText,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(
-                defaultRadius,
-              ),
-              borderSide: BorderSide(
-                color: kLoginFontColor,
-              ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(
-                defaultRadius,
-              ),
-              borderSide: BorderSide(
-                color: kPrimaryColor,
-              ),
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: blueTextStyle.copyWith(
+              fontSize: 14,
+              fontWeight: semibold,
             ),
           ),
-        ),
-      ]),
+          const SizedBox(height: 4),
+          TextFormField(
+            cursorColor: kBlackColor,
+            obscureText: obscureText,
+            decoration: InputDecoration(
+              contentPadding: const EdgeInsets.symmetric(
+                vertical: 7,
+                horizontal: 12,
+              ),
+              hintText: hintText,
+              hintStyle: TextStyle(fontSize: 14),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(
+                  color: kLoginFontColor,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(
+                  color: kPrimaryColor,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

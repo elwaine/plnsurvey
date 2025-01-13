@@ -6,17 +6,16 @@ class HalfCircleClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     final path = Path();
-    path.moveTo(
-        0, size.height * 0.75); // Start at the middle-left of the widget.
+    path.moveTo(0, size.height * 0.75);
     path.quadraticBezierTo(
       size.width / 2,
-      size.height * 1.2, // Control point for the downward curve.
+      size.height * 1.2,
       size.width,
-      size.height * 0.75, // End at the middle-right of the widget.
+      size.height * 0.75,
     );
-    path.lineTo(size.width, 0); // Line to top-right corner.
-    path.lineTo(0, 0); // Line to top-left corner.
-    path.close(); // Close the path.
+    path.lineTo(size.width, 0);
+    path.lineTo(0, 0);
+    path.close();
     return path;
   }
 
@@ -42,6 +41,9 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -52,10 +54,11 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
           ),
 
-          Padding(
-            padding: EdgeInsets.only(top: 510, left: 80),
+          Positioned(
+            top: screenHeight * 0.6,
+            left: screenWidth * 0.08,
             child: SizedBox(
-              width: 400,
+              width: screenWidth * 0.9,
               child: Image.asset(
                 'assets/tianglistrik.png',
                 fit: BoxFit.fill,
@@ -63,34 +66,21 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
           ),
 
-          // Expanded(
-          //   child: Padding(
-          //     padding: EdgeInsets.only(bottom: 400),
-          //     child: SizedBox(
-          //       width: 550,
-          //       height: 550,
-          //       child: Image.asset(
-          //         'assets/circlesplash.png',
-          //         fit: BoxFit.fill,
-          //       ),
-          //     ),
-          //   ),
-          // ),
-
           ClipPath(
             clipper: HalfCircleClipper(),
             child: Container(
-              color: Colors.white, // The color of the half-circle.
-              height: 360, // Adjust the height to fit your design.
-              width: double.infinity, // Full width of the screen.
+              color: Colors.white,
+              height: screenHeight * 0.44,
+              width: double.infinity,
             ),
           ),
 
-          Padding(
-            padding: EdgeInsets.only(top: 400, left: 20, bottom: 300),
+          Positioned(
+            top: screenHeight * 0.48,
+            left: screenWidth * 0.055,
             child: SizedBox(
-              width: 200,
-              height: 65,
+              width: screenWidth * 0.5,
+              height: screenHeight * 0.08,
               child: Image.asset(
                 'assets/quotesplash.png',
                 fit: BoxFit.fill,
@@ -98,15 +88,14 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
           ),
 
-          Center(
-            child: Padding(
-              padding: EdgeInsets.only(bottom: 470),
-              child: SizedBox(
-                width: 320,
-                child: Image.asset(
-                  'assets/logoplnsurvey.png',
-                  fit: BoxFit.contain,
-                ),
+          Positioned(
+            top: screenHeight * 0.1,
+            left: screenWidth * 0.07,
+            child: SizedBox(
+              width: screenWidth * 0.9,
+              child: Image.asset(
+                'assets/logoplnsurvey.png',
+                fit: BoxFit.contain,
               ),
             ),
           ),

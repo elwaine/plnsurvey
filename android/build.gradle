@@ -1,3 +1,14 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.2.1'
+    }
+}
+
+
 allprojects {
     repositories {
         google()
@@ -8,9 +19,12 @@ allprojects {
 rootProject.buildDir = "../build"
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
-}
-subprojects {
-    project.evaluationDependsOn(":app")
+    evaluationDependsOn(":app")
+
+    // Ensure Java compatibility for subprojects
+    tasks.withType(JavaCompile).configureEach {
+        options.release = 22 // Ensures compatibility with JDK 22
+    }
 }
 
 tasks.register("clean", Delete) {
