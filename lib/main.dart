@@ -9,6 +9,7 @@ import 'package:plnsurvey/ui/pages/report_survey.dart';
 import 'package:plnsurvey/ui/pages/splash_screen.dart';
 import 'package:plnsurvey/ui/pages/surveyB.dart';
 import 'package:plnsurvey/ui/pages/surveyD.dart';
+import 'package:plnsurvey/ui/pages/surveyE.dart';
 
 void main() => runApp(MyApp());
 
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         '/editpfp': (context) => Editpfp(),
         '/surveyb': (context) => SurveyB(),
         '/surveyd': (context) => SurveyD(),
+        '/surveye': (context) => SurveyE(),
         '/surveya': (context) => SurveyPage(),
       },
     );

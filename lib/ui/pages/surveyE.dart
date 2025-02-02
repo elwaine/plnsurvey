@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:plnsurvey/shared/theme.dart';
+import 'package:plnsurvey/ui/widgets/custom_table.dart';
 import 'package:plnsurvey/ui/widgets/customcheckbox.dart';
+import 'package:plnsurvey/ui/widgets/customnotecard.dart';
+import 'package:plnsurvey/ui/widgets/customrowradio.dart';
 import 'package:plnsurvey/ui/widgets/radiocontainer.dart';
 import 'package:plnsurvey/ui/widgets/radiolainny.dart';
 import 'package:plnsurvey/ui/widgets/textfield.dart';
@@ -66,12 +69,12 @@ class Headerd extends StatelessWidget {
   }
 }
 
-class SurveyD extends StatefulWidget {
+class SurveyE extends StatefulWidget {
   @override
-  _SurveyDState createState() => _SurveyDState();
+  _SurveyEState createState() => _SurveyEState();
 }
 
-class _SurveyDState extends State<SurveyD> {
+class _SurveyEState extends State<SurveyE> {
   String jenisBantuan = "";
   String koordinat = "";
   String day = '';
@@ -104,46 +107,26 @@ class _SurveyDState extends State<SurveyD> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: 18),
-                    Container(
-                      padding: const EdgeInsets.all(16.0),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 2,
-                            spreadRadius: 2,
-                            offset: const Offset(0, 5),
-                          ),
-                        ],
-                      ),
-                      child: SurveyTextFormField(
-                        title:
-                            "Siapa pengelola bantuan? Apakah ada struktur organisasi pengelolanya?",
-                        hintText: "Masukkan Jawaban Anda",
-                      ),
+                    CustomRowRadioButtonz(
+                      title: "Kesimpulan",
+                      hintText: "-",
+                      options: ["Layak", "Tidak Layak"],
+                      choice: null,
+                      onChanged: (value) {
+                        print("Selected: $value");
+                      },
                     ),
                     SizedBox(height: 18),
-                    Container(
-                      padding: const EdgeInsets.all(16.0),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 2,
-                            spreadRadius: 2,
-                            offset: const Offset(0, 5),
-                          ),
-                        ],
-                      ),
-                      child: SurveyTextFormField(
-                        title:
-                            "Jika bantuan berupa transfer dana? Komitmen akan 2 direalisasikan segera dan dilaporkan realisasinya (Laporan Pertanggungjawaban/LPJ)",
-                        hintText: "Masukkan Jawaban Anda",
-                      ),
+                    SurveyNoteCard(
+                      title: "Catatan Survey",
+                      topContent:
+                          "diperlukan jika program layak dibantu namun dengan catatan dan menjawab atau memastikan catatan di form evaluasi awal di lapangan",
+                      bottomHintText: "Tambahkan catatan Anda di sini...",
+                      backgroundColor: Colors.white,
+                    ),
+                    SizedBox(height: 18),
+                    Column(
+                      children: [SurveyTeamWidget()],
                     ),
                     SizedBox(height: 18),
                     Container(
@@ -518,6 +501,6 @@ class BackArrowPainter extends CustomPainter {
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: SurveyD(),
+    home: SurveyE(),
   ));
 }

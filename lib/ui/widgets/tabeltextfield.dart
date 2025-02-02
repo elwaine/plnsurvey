@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import '../../shared/theme.dart';
 
-class SurveyTextFormField extends StatelessWidget {
+class TabelTextFormField extends StatelessWidget {
   final String title;
   final String hintText;
   final bool obscureText;
+  final TextEditingController? controller; // Added controller
 
-  const SurveyTextFormField({
+  const TabelTextFormField({
     Key? key,
     required this.title,
     required this.hintText,
     this.obscureText = false,
+    this.controller, // Controller parameter
   }) : super(key: key);
 
   @override
@@ -28,23 +30,23 @@ class SurveyTextFormField extends StatelessWidget {
               fontWeight: black,
             ),
           ),
-          SizedBox(height: 5),
-          const SizedBox(height: 4),
+          const SizedBox(height: 5),
           TextFormField(
+            controller: controller, // Integrated controller
             cursorColor: kBlackColor,
             obscureText: obscureText,
             decoration: InputDecoration(
               filled: true,
-              fillColor: Color(0xffF2F8F9),
+              fillColor: const Color(0xffF2F8F9),
               contentPadding: const EdgeInsets.symmetric(
                 vertical: 7,
                 horizontal: 12,
               ),
               hintText: hintText,
-              hintStyle: TextStyle(fontSize: 14),
+              hintStyle: const TextStyle(fontSize: 14),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: Colors.transparent, // Invisible border
                 ),
               ),
