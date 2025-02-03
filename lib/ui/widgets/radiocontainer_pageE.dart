@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:plnsurvey/shared/theme.dart';
 
-class CustomRadioContainer extends StatefulWidget {
+class CustomRadioContainerE extends StatefulWidget {
   final String title;
-  final String hintText;
   final List<String> options;
   final String? choice;
   final String? extraOptionLabel;
   final ValueChanged<String?>? onChanged;
-  final Widget? child; // ✅ Ensure child is included
+  final Widget? child;
 
-  const CustomRadioContainer({
+  const CustomRadioContainerE({
     Key? key,
     required this.title,
-    required this.hintText,
     required this.options,
     this.choice,
     this.extraOptionLabel,
@@ -22,10 +20,10 @@ class CustomRadioContainer extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _CustomRadioContainerState createState() => _CustomRadioContainerState();
+  _CustomRadioContainerEState createState() => _CustomRadioContainerEState();
 }
 
-class _CustomRadioContainerState extends State<CustomRadioContainer> {
+class _CustomRadioContainerEState extends State<CustomRadioContainerE> {
   String? _selectedOption;
 
   @override
@@ -76,22 +74,52 @@ class _CustomRadioContainerState extends State<CustomRadioContainer> {
 
           // 📝 Render child if it's not null
           if (widget.child != null) ...[
-            const SizedBox(height: 8), // Add spacing
+            const SizedBox(height: 8),
             widget.child!,
             const SizedBox(height: 12),
           ],
 
           // 📝 Radio Buttons
-          const SizedBox(height: 16),
-          ...widget.options.map(
-            (option) => Padding(
-              padding: const EdgeInsets.only(bottom: 12.0),
-              child: _buildRadioOption(
-                context,
-                title: option,
-                value: option,
-                screenHeight: screenHeight,
-              ),
+          SizedBox(height: 16),
+          Center(
+            child: Wrap(
+              alignment: WrapAlignment.center,
+              spacing: 24.0,
+              runSpacing: 16.0,
+              children: widget.options
+                  .asMap()
+                  .entries
+                  .map(
+                    (entry) => Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // Circle Radio Button
+                        GestureDetector(
+                          onTap: () => _handleSelection(entry.value),
+                          child: Container(
+                            width: 20,
+                            height: 20,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: _selectedOption == entry.value
+                                  ? kPrimaryColor
+                                  : const Color(0xffE0F7FA),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          (entry.key + 1).toString(),
+                          style: darkblueTextStyle.copyWith(
+                            fontFamily: 'Poppins',
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                  .toList(),
             ),
           ),
 
@@ -118,7 +146,6 @@ class _CustomRadioContainerState extends State<CustomRadioContainer> {
                   vertical: 7,
                   horizontal: 12,
                 ),
-                hintText: widget.hintText,
                 hintStyle: TextStyle(fontSize: 14),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -161,9 +188,8 @@ class _CustomRadioContainerState extends State<CustomRadioContainer> {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: _selectedOption == value
-                      ? kPrimaryColor // Primary color when selected
-                      : Colors.black38, // Gray when unselected
+                  color:
+                      _selectedOption == value ? kPrimaryColor : Colors.black38,
                   width: 2,
                 ),
               ),

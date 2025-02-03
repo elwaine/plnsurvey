@@ -60,7 +60,7 @@ class _SurveyTeamWidgetState extends State<SurveyTeamWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(0.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -137,7 +137,11 @@ class _SurveyTeamWidgetState extends State<SurveyTeamWidget> {
                             child: index < plnTeam.length
                                 ? Row(
                                     children: [
-                                      Text(plnTeam[index]),
+                                      Text(
+                                        plnTeam[index],
+                                        style: darkblueTextStyle.copyWith(
+                                            fontSize: 15),
+                                      ),
                                       SizedBox(width: 8),
                                       Icon(
                                         Icons.image,
@@ -153,7 +157,11 @@ class _SurveyTeamWidgetState extends State<SurveyTeamWidget> {
                             child: index < externalTeam.length
                                 ? Row(
                                     children: [
-                                      Text(externalTeam[index]),
+                                      Text(
+                                        externalTeam[index],
+                                        style: darkblueTextStyle.copyWith(
+                                            fontSize: 15),
+                                      ),
                                       SizedBox(width: 8),
                                       Icon(
                                         Icons.image,
