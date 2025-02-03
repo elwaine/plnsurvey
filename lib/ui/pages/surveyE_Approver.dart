@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:plnsurvey/shared/theme.dart';
+import 'package:plnsurvey/ui/widgets/custom_button.dart';
+import 'package:plnsurvey/ui/widgets/custom_button_table.dart';
 import 'package:plnsurvey/ui/widgets/custom_table.dart';
 import 'package:plnsurvey/ui/widgets/customcheckbox.dart';
 import 'package:plnsurvey/ui/widgets/customnotecard.dart';
@@ -70,12 +72,12 @@ class Headerd extends StatelessWidget {
   }
 }
 
-class SurveyE extends StatefulWidget {
+class SurveyE_Approver extends StatefulWidget {
   @override
-  _SurveyEState createState() => _SurveyEState();
+  _SurveyE_ApproverState createState() => _SurveyE_ApproverState();
 }
 
-class _SurveyEState extends State<SurveyE> {
+class _SurveyE_ApproverState extends State<SurveyE_Approver> {
   String jenisBantuan = "";
   String koordinat = "";
   String day = '';
@@ -138,67 +140,43 @@ class _SurveyEState extends State<SurveyE> {
                     SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         // Back Button (Left Side)
-                        Padding(
-                          padding: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width * 0.05,
-                            bottom: MediaQuery.of(context).size.height * 0.02,
-                          ),
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: Container(
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                color: kPrimaryColor,
-                                shape: BoxShape.circle,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.2),
-                                    blurRadius: 0.5,
-                                    spreadRadius: 0.5,
-                                    offset: const Offset(0, 2),
-                                  ),
-                                ],
-                              ),
-                              child: CustomPaint(
-                                painter: BackArrowPainter(),
-                              ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: kPrimaryColor,
+                              shape: BoxShape.circle,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.2),
+                                  blurRadius: 0.5,
+                                  spreadRadius: 0.5,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: CustomPaint(
+                              painter: BackArrowPainter(),
                             ),
                           ),
                         ),
-
-                        //Next Button
-                        Padding(
-                          padding: EdgeInsets.only(
-                            right: MediaQuery.of(context).size.width * 0.05,
-                            bottom: MediaQuery.of(context).size.height * 0.02,
-                          ),
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, '/surveye-approver');
-                            },
-                            child: Container(
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                color: kPrimaryColor,
-                                shape: BoxShape.circle,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.2),
-                                    blurRadius: 0.5,
-                                    spreadRadius: 0.5,
-                                    offset: const Offset(0, 2),
-                                  ),
-                                ],
-                              ),
-                              child: CustomPaint(
-                                painter: ArrowPainter(),
-                              ),
+                        // Approve Button (Right Side)
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16.0, vertical: 8),
+                            child: CustomButtonz(
+                              title: 'Setujui',
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/surveya');
+                              },
                             ),
                           ),
                         ),
@@ -284,27 +262,6 @@ class _SurveyEState extends State<SurveyE> {
   }
 }
 
-class ArrowPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final Paint paint = Paint()
-      ..color = Colors.white
-      ..strokeWidth = 2
-      ..style = PaintingStyle.stroke
-      ..strokeCap = StrokeCap.round;
-
-    final Path path = Path();
-    path.moveTo(size.width * 0.4, size.height * 0.3);
-    path.lineTo(size.width * 0.6, size.height * 0.5);
-    path.lineTo(size.width * 0.4, size.height * 0.7);
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) => false;
-}
-
 class BackArrowPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
@@ -329,6 +286,6 @@ class BackArrowPainter extends CustomPainter {
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: SurveyE(),
+    home: SurveyE_Approver(),
   ));
 }

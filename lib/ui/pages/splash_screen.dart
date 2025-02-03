@@ -35,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     Timer(const Duration(seconds: 4), () {
       // Navigator.pushNamed(context, '/login-form');
-      Navigator.pushNamed(context, '/surveya');
+      Navigator.pushNamed(context, '/hasilsurveya');
     });
     super.initState();
   }

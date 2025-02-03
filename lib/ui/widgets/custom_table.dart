@@ -59,6 +59,8 @@ class _SurveyTeamWidgetState extends State<SurveyTeamWidget> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Padding(
       padding: EdgeInsets.all(0.0),
       child: Column(
@@ -98,8 +100,8 @@ class _SurveyTeamWidgetState extends State<SurveyTeamWidget> {
                       borderRadius: BorderRadius.circular(10),
                       width: 1.5),
                   columnWidths: const {
-                    0: FlexColumnWidth(3),
-                    1: FlexColumnWidth(3),
+                    0: FlexColumnWidth(4),
+                    1: FlexColumnWidth(4),
                   },
                   children: [
                     // Row 1: Headers
@@ -133,7 +135,7 @@ class _SurveyTeamWidgetState extends State<SurveyTeamWidget> {
                       (index) => TableRow(
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(8.0),
                             child: index < plnTeam.length
                                 ? Row(
                                     children: [
@@ -142,7 +144,7 @@ class _SurveyTeamWidgetState extends State<SurveyTeamWidget> {
                                         style: darkblueTextStyle.copyWith(
                                             fontSize: 15),
                                       ),
-                                      SizedBox(width: 8),
+                                      Spacer(), // Pushes the icon to the right
                                       Icon(
                                         Icons.image,
                                         color: kSurveyFontColor,
@@ -162,7 +164,7 @@ class _SurveyTeamWidgetState extends State<SurveyTeamWidget> {
                                         style: darkblueTextStyle.copyWith(
                                             fontSize: 15),
                                       ),
-                                      SizedBox(width: 8),
+                                      Spacer(), // Pushes the icon to the right
                                       Icon(
                                         Icons.image,
                                         color: kSurveyFontColor,

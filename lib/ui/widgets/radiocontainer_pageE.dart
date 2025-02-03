@@ -84,7 +84,7 @@ class _CustomRadioContainerEState extends State<CustomRadioContainerE> {
           Center(
             child: Wrap(
               alignment: WrapAlignment.center,
-              spacing: 24.0,
+              spacing: 45.0,
               runSpacing: 16.0,
               children: widget.options
                   .asMap()

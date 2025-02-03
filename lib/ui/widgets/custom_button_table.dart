@@ -22,7 +22,7 @@ class CustomButtonz extends StatelessWidget {
     return Container(
       width: screenWidth * 0.2,
       height: screenHeight * 0.055,
-      margin: EdgeInsets.only(top: 10, left: 15, right: 15),
+      margin: EdgeInsets.only(top: 10, left: 15, right: 15, bottom: 10),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [

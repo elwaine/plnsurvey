@@ -393,7 +393,7 @@ class _SurveyDState extends State<SurveyD> {
                         hintText: "Masukkan Jawaban Anda",
                       ),
                     ),
-                    SizedBox(height: 16),
+                    SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -416,8 +416,8 @@ class _SurveyDState extends State<SurveyD> {
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.black.withOpacity(0.2),
-                                    blurRadius: 4,
-                                    spreadRadius: 2,
+                                    blurRadius: 0.5,
+                                    spreadRadius: 0.5,
                                     offset: const Offset(0, 2),
                                   ),
                                 ],
@@ -448,8 +448,8 @@ class _SurveyDState extends State<SurveyD> {
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.black.withOpacity(0.2),
-                                    blurRadius: 4,
-                                    spreadRadius: 2,
+                                    blurRadius: 0.5,
+                                    spreadRadius: 0.5,
                                     offset: const Offset(0, 2),
                                   ),
                                 ],
@@ -469,6 +469,75 @@ class _SurveyDState extends State<SurveyD> {
           ),
         ],
       ),
+      floatingActionButton: ClipRRect(
+        borderRadius: BorderRadius.circular(50),
+        child: Container(
+          height: screenHeight * 0.1,
+          width: screenWidth * 0.2,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                blurRadius: 10,
+                offset: Offset(0, 5),
+              ),
+            ],
+          ),
+          child: FloatingActionButton(
+            backgroundColor: Colors.white,
+            onPressed: () {},
+            elevation: 0,
+            child: Image.asset(
+              'assets/home-orl.png',
+              width: 28,
+              height: 28,
+            ),
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        color: kPrimaryColor,
+        shape: CircularNotchedRectangle(),
+        notchMargin: 2,
+        child: Container(
+          height: 70,
+          padding: EdgeInsets.symmetric(horizontal: 40),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(bottom: 15),
+                child: IconButton(
+                  icon: Image.asset(
+                    'assets/check-square-orl.png',
+                    width: 24,
+                    height: 24,
+                  ),
+                  onPressed: () {
+                    // Add logic here
+                  },
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(bottom: 15),
+                child: IconButton(
+                  icon: Image.asset(
+                    'assets/table-orl.png',
+                    width: 24,
+                    height: 24,
+                  ),
+                  onPressed: () {
+                    // Add logic here
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -478,7 +547,7 @@ class ArrowPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final Paint paint = Paint()
       ..color = Colors.white
-      ..strokeWidth = 4
+      ..strokeWidth = 2
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
 
@@ -499,7 +568,7 @@ class BackArrowPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final Paint paint = Paint()
       ..color = Colors.white
-      ..strokeWidth = 4
+      ..strokeWidth = 2
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
 

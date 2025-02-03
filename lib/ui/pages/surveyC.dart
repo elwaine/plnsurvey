@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:plnsurvey/shared/theme.dart';
-import 'package:plnsurvey/ui/widgets/custom_table.dart';
 import 'package:plnsurvey/ui/widgets/customcheckbox.dart';
 import 'package:plnsurvey/ui/widgets/customnotecard.dart';
-import 'package:plnsurvey/ui/widgets/customrowradio.dart';
 import 'package:plnsurvey/ui/widgets/radiocontainer.dart';
-import 'package:plnsurvey/ui/widgets/radiocontainer_pageE.dart';
 import 'package:plnsurvey/ui/widgets/radiolainny.dart';
 import 'package:plnsurvey/ui/widgets/textfield.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:plnsurvey/ui/widgets/radiobuttonlist.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:plnsurvey/ui/widgets/textfieldcard.dart';
 
-class Headerd extends StatelessWidget {
-  const Headerd({super.key});
+class Headerc extends StatelessWidget {
+  const Headerc({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -70,12 +68,12 @@ class Headerd extends StatelessWidget {
   }
 }
 
-class SurveyE extends StatefulWidget {
+class SurveyC extends StatefulWidget {
   @override
-  _SurveyEState createState() => _SurveyEState();
+  _SurveyCState createState() => _SurveyCState();
 }
 
-class _SurveyEState extends State<SurveyE> {
+class _SurveyCState extends State<SurveyC> {
   String jenisBantuan = "";
   String koordinat = "";
   String day = '';
@@ -99,7 +97,7 @@ class _SurveyEState extends State<SurveyE> {
       backgroundColor: kSurveyBgColor,
       body: Column(
         children: [
-          Headerd(),
+          Headerc(),
           Expanded(
             child: SingleChildScrollView(
               child: Padding(
@@ -107,33 +105,94 @@ class _SurveyEState extends State<SurveyE> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 18),
-                    CustomRowRadioButtonz(
-                      title: "Kesimpulan",
-                      hintText: "-",
-                      options: ["Layak", "Tidak Layak"],
-                      choice: null,
-                      onChanged: (value) {
-                        print("Selected: $value");
-                      },
+                    Textfieldcard(
+                      title: "Jika bantuan mobil/motor atas nama siapa?",
+                      hintText: "Masukkan Jawaban Anda",
+                      child: Container(
+                        padding: const EdgeInsets.all(16.0),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 2,
+                              spreadRadius: 2,
+                              offset: const Offset(0, 5),
+                            ),
+                          ],
+                        ),
+                        child: Text(
+                          "Tidak bisa kepemilikan perorangan Yayasan/Organisasi",
+                          style: darkblueTextStyle.copyWith(
+                            fontFamily: 'Poppins',
+                            fontSize: 14,
+                            fontWeight: black,
+                            height: 2,
+                          ),
+                        ),
+                      ),
                     ),
-                    SizedBox(height: 18),
-                    SurveyNoteCard(
-                      title: "Catatan Survey",
-                      topContent:
-                          "diperlukan jika program layak dibantu namun dengan catatan dan menjawab atau memastikan catatan di form evaluasi awal di lapangan",
-                      bottomHintText: "Tambahkan catatan Anda di sini...",
-                      backgroundColor: Colors.white,
+                    SizedBox(height: 16),
+                    Textfieldcard(
+                      title: "Syarat jika bantuan mobil/motor : ",
+                      child: Container(
+                        padding: const EdgeInsets.all(16.0),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 2,
+                              spreadRadius: 2,
+                              offset: const Offset(0, 5),
+                            ),
+                          ],
+                        ),
+                        child: Text.rich(
+                          TextSpan(
+                            style: darkblueTextStyle.copyWith(
+                              fontFamily: 'Poppins',
+                              fontSize: 14,
+                              fontWeight: black,
+                              height: 2,
+                            ),
+                            children: [
+                              TextSpan(text: 'a. Surat keterangan domisili\n'),
+                              TextSpan(text: 'b. Surat Kuasa Asli\n'),
+                              TextSpan(text: 'c. NPWP Asli\n'),
+                              TextSpan(
+                                  text: 'd. Akta pendirian copy 2 legalisir\n'),
+                              TextSpan(text: 'e. Tanda daftar Yayasan\n'),
+                              TextSpan(
+                                  text:
+                                      'f. Bukti pendirian yayasan/akta Yayasan bidang Kesehatan untuk permintaan bantuan mobil ambulance.'),
+                            ],
+                          ),
+                        ),
+                      ),
+                      hintText: "Masukkan jawaban anda",
                     ),
-                    SizedBox(height: 18),
-                    Column(
-                      children: [SurveyTeamWidget()],
-                    ),
-                    SizedBox(height: 18),
-                    CustomRadioContainerE(
-                      title:
-                          "apakah anda bersedia menyetujui semua syarat yang berlaku?",
-                      options: ["1", "2", "3", "4", "5"],
+                    SizedBox(height: 16),
+                    Container(
+                      padding: const EdgeInsets.all(16.0),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 2,
+                            spreadRadius: 2,
+                            offset: const Offset(0, 5),
+                          ),
+                        ],
+                      ),
+                      child: SurveyTextFormField(
+                        title: "Informasi Lainnya",
+                        hintText: "Masukkan Catatan (jika ada)",
+                      ),
                     ),
                     SizedBox(height: 20),
                     Row(
@@ -171,7 +230,7 @@ class _SurveyEState extends State<SurveyE> {
                           ),
                         ),
 
-                        //Next Button
+                        // Next Button (Right Side)
                         Padding(
                           padding: EdgeInsets.only(
                             right: MediaQuery.of(context).size.width * 0.05,
@@ -179,7 +238,7 @@ class _SurveyEState extends State<SurveyE> {
                           ),
                           child: GestureDetector(
                             onTap: () {
-                              Navigator.pushNamed(context, '/surveye-approver');
+                              Navigator.pushNamed(context, '/surveyd');
                             },
                             child: Container(
                               width: 40,
@@ -329,6 +388,6 @@ class BackArrowPainter extends CustomPainter {
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: SurveyE(),
+    home: SurveyC(),
   ));
 }
