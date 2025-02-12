@@ -1,34 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:plnsurvey/shared/theme.dart';
+import 'package:plnsurvey/ui/widgets/custom_bar_chart.dart';
+import 'package:plnsurvey/ui/widgets/custom_button_download.dart';
 import 'package:plnsurvey/ui/widgets/custom_button_table.dart';
+import 'package:plnsurvey/ui/widgets/custom_pie_chart.dart';
+import 'package:plnsurvey/ui/widgets/custom_pienocard.dart';
 import 'package:plnsurvey/ui/widgets/custom_table.dart';
-import 'package:plnsurvey/ui/widgets/customcheckbox.dart';
-import 'package:plnsurvey/ui/widgets/customnotecard.dart';
-import 'package:plnsurvey/ui/widgets/customrowradio.dart';
-import 'package:plnsurvey/ui/widgets/radiocontainer.dart';
-import 'package:plnsurvey/ui/widgets/radiocontainer_pageE.dart';
+import 'package:plnsurvey/ui/widgets/hasiltable.dart';
+import 'package:plnsurvey/ui/widgets/hasiltextfield.dart';
+import 'package:plnsurvey/ui/widgets/hasiltextfield_nocard.dart';
 import 'package:plnsurvey/ui/widgets/radiolainny.dart';
 import 'package:plnsurvey/ui/widgets/textfield.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:plnsurvey/ui/widgets/radiobuttonlist.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Headerd extends StatelessWidget {
-  const Headerd({super.key});
-
+class CustomHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+
     return SizedBox(
       height: 125,
       child: Stack(
         clipBehavior: Clip.none,
         children: [
+          // Rectangle part of the header
           Container(
             width: screenWidth,
             height: 60,
             color: kPrimaryColor,
           ),
+          // Circle part of the header
           Align(
             alignment: Alignment.topCenter,
             child: Container(
@@ -71,13 +74,14 @@ class Headerd extends StatelessWidget {
   }
 }
 
-class SurveyE extends StatefulWidget {
+class HasilSurveyE extends StatefulWidget {
   @override
-  _SurveyEState createState() => _SurveyEState();
+  _HasilSurveyEState createState() => _HasilSurveyEState();
 }
 
-class _SurveyEState extends State<SurveyE> {
+class _HasilSurveyEState extends State<HasilSurveyE> {
   String jenisBantuan = "";
+
   String koordinat = "";
   String day = '';
   String month = '';
@@ -88,6 +92,7 @@ class _SurveyEState extends State<SurveyE> {
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
 
     if (image != null) {
+      // Here you can handle the picked image, e.g., display it or pass it to the backend
       print("Picked Image Path: ${image.path}");
     }
   }
@@ -100,7 +105,7 @@ class _SurveyEState extends State<SurveyE> {
       backgroundColor: kSurveyBgColor,
       body: Column(
         children: [
-          Headerd(),
+          CustomHeader(),
           Expanded(
             child: SingleChildScrollView(
               child: Padding(
@@ -108,39 +113,142 @@ class _SurveyEState extends State<SurveyE> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Container(
+                      padding: const EdgeInsets.all(16.0),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 2,
+                            spreadRadius: 2,
+                            offset: const Offset(0, 5),
+                          ),
+                        ],
+                      ),
+                      child: Column(children: [
+                        CustomPieChart(
+                          title: "Kepemilikan aset bantuan (bantuan fisik)",
+                          data: {
+                            "Layak": 70,
+                            "Tidak layak": 30,
+                          },
+                          colors: {
+                            "Layak": Colors.lightGreen,
+                            "Tidak layak": Colors.lightBlueAccent,
+                          },
+                        ),
+                        SizedBox(height: 20),
+                        HasilTextField(
+                            title: "Rekomendasi Besaran Bantuan(jika layak):",
+                            texts: [
+                              'Rp.500.000',
+                              'Rp.500.000',
+                              'Rp.500.000',
+                            ]),
+                        SizedBox(height: 20),
+                        HasilTextField(title: "Alasan tidak layak:", texts: [
+                          '-',
+                        ])
+                      ]),
+                    ),
                     SizedBox(height: 18),
-                    CustomRowRadioButtonz(
-                      title: "Kesimpulan",
-                      hintText: "-",
-                      options: ["Layak", "Tidak Layak"],
-                      choice: null,
-                      onChanged: (value) {
-                        print("Selected: $value");
+                    AddressFileWidget(
+                      title: 'Tim Survey',
+                      files: ["TTD.JPG", "TTD.JPG"],
+                      addresses: ['Naylafilsah', 'Aurelia'],
+                    ),
+                    SizedBox(height: 18),
+                    Container(
+                      padding: const EdgeInsets.all(16.0),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 2,
+                            spreadRadius: 2,
+                            offset: const Offset(0, 5),
+                          ),
+                        ],
+                      ),
+                      // hasil2
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Catatan Survey",
+                            style: darkblueTextStyle.copyWith(
+                              fontFamily: 'Poppins',
+                              fontSize: 15,
+                              fontWeight: black,
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.all(16.0),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  blurRadius: 2,
+                                  spreadRadius: 2,
+                                  offset: const Offset(0, 5),
+                                ),
+                              ],
+                            ),
+                            child: Text.rich(
+                              TextSpan(
+                                style: darkblueTextStyle.copyWith(
+                                  fontFamily: 'Poppins',
+                                  fontSize: 14,
+                                  fontWeight: black,
+                                  height: 2,
+                                ),
+                                children: [
+                                  TextSpan(
+                                      text:
+                                          'diperlukan jika program layak dibantu namun dengan catatan dan menjawab atau memastikan catatan di form evaluasi awal di lapangan'),
+                                ],
+                              ),
+                            ),
+                          ),
+                          HasilTextField(title: "", texts: [
+                            "Program layak untuk dibantu dalam kegiatan persediaan sampah",
+                            "Program layak untuk dibantu dalam kegiatan persediaan sampah",
+                          ])
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 18),
+                    CustomBarChartCard(
+                      title: "Kepemilikan aset bantuan (bantuan fisik)",
+                      data: {
+                        "Di Tanah Pribadi": 5,
+                        "Lahan Pribadi": 3,
+                        "Kepemilikan Masyarakat/komunitas": 4,
+                        "Lainnya: Milik keluarga": 2,
+                      },
+                      colors: {
+                        "Di Tanah Pribadi": Colors.cyan,
+                        "Lahan Pribadi": Colors.pink,
+                        "Kepemilikan Masyarakat/komunitas": Colors.blue,
+                        "Lainnya: Milik keluarga": Colors.red,
                       },
                     ),
-                    SizedBox(height: 18),
-                    SurveyNoteCard(
-                      title: "Catatan Survey",
-                      topContent:
-                          "diperlukan jika program layak dibantu namun dengan catatan dan menjawab atau memastikan catatan di form evaluasi awal di lapangan",
-                      bottomHintText: "Tambahkan catatan Anda di sini...",
-                      backgroundColor: Colors.white,
+                    SizedBox(
+                      height: 20,
                     ),
-                    SizedBox(height: 18),
-                    Column(
-                      children: [SurveyTeamWidget()],
-                    ),
-                    SizedBox(height: 18),
-                    CustomRadioContainerE(
-                      title:
-                          "apakah anda bersedia menyetujui semua syarat yang berlaku?",
-                      options: ["1", "2", "3", "4", "5"],
-                    ),
-                    SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        // Back Button (Left Side)
+                        SizedBox(
+                          width: 5,
+                        ),
                         // Back Button (Left Side)
                         GestureDetector(
                           onTap: () {
@@ -150,7 +258,7 @@ class _SurveyEState extends State<SurveyE> {
                             width: 40,
                             height: 40,
                             decoration: BoxDecoration(
-                              color: kPrimaryColor,
+                              color: Color(0xff24D7FF),
                               shape: BoxShape.circle,
                               boxShadow: [
                                 BoxShadow(
@@ -171,11 +279,10 @@ class _SurveyEState extends State<SurveyE> {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 16.0, vertical: 8),
-                            child: CustomButtonz(
-                              title: 'Submit',
+                            child: DownloadButton(
+                              title: 'Download Survey',
                               onPressed: () {
-                                Navigator.pushNamed(
-                                    context, '/surveye-approver');
+                                Navigator.pushNamed(context, '/surveya');
                               },
                             ),
                           ),
@@ -307,6 +414,6 @@ class BackArrowPainter extends CustomPainter {
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: SurveyE(),
+    home: HasilSurveyE(),
   ));
 }

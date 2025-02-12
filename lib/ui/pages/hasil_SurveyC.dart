@@ -5,6 +5,7 @@ import 'package:plnsurvey/ui/widgets/custom_pie_chart.dart';
 import 'package:plnsurvey/ui/widgets/custom_pienocard.dart';
 import 'package:plnsurvey/ui/widgets/hasiltable.dart';
 import 'package:plnsurvey/ui/widgets/hasiltextfield.dart';
+import 'package:plnsurvey/ui/widgets/hasiltextfield_nocard.dart';
 import 'package:plnsurvey/ui/widgets/radiolainny.dart';
 import 'package:plnsurvey/ui/widgets/textfield.dart';
 import 'package:image_picker/image_picker.dart';
@@ -70,12 +71,12 @@ class CustomHeader extends StatelessWidget {
   }
 }
 
-class HasilSurveyB extends StatefulWidget {
+class HasilSurveyC extends StatefulWidget {
   @override
-  _HasilSurveyBState createState() => _HasilSurveyBState();
+  _HasilSurveyCState createState() => _HasilSurveyCState();
 }
 
-class _HasilSurveyBState extends State<HasilSurveyB> {
+class _HasilSurveyCState extends State<HasilSurveyC> {
   String jenisBantuan = "";
 
   String koordinat = "";
@@ -109,18 +110,6 @@ class _HasilSurveyBState extends State<HasilSurveyB> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CustomPieChartCard(
-                      title: "Kepemilikan aset bantuan (bantuan fisik)",
-                      data: {
-                        "Ya": 70,
-                        "Tidak": 30,
-                      },
-                      colors: {
-                        "Ya": Colors.orangeAccent,
-                        "Tidak": Colors.pinkAccent,
-                      },
-                    ),
-                    SizedBox(height: 18),
                     Container(
                       padding: const EdgeInsets.all(16.0),
                       decoration: BoxDecoration(
@@ -139,7 +128,7 @@ class _HasilSurveyBState extends State<HasilSurveyB> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Jika Bangunan, dilampirkan:",
+                            "Jika bantuan mobil/motor atas nama siapa?",
                             style: darkblueTextStyle.copyWith(
                               fontFamily: 'Poppins',
                               fontSize: 15,
@@ -172,27 +161,17 @@ class _HasilSurveyBState extends State<HasilSurveyB> {
                                 children: [
                                   TextSpan(
                                     text:
-                                        'A. Kepemilikan tanah lahan (SHM, surat hibah/wakaf, SHGB, dll) yang ditandatangani pejabat yang berwenang.\n',
-                                  ),
-                                  TextSpan(
-                                    text:
-                                        'B. Legalitas untuk pembangunan agar dilengkapi (IMB, Amdal, dll).',
+                                        ' (tidak bisa kepemilikan perorangan) Yayasan/ organisasi',
                                   ),
                                 ],
                               ),
                             ),
                           ),
-                          CustomPieChart(
-                            title: "",
-                            data: {
-                              "Ya": 70,
-                              "Tidak": 30,
-                            },
-                            colors: {
-                              "Ya": Colors.deepPurpleAccent,
-                              "Tidak": Colors.pinkAccent,
-                            },
-                          )
+                          HasilTextField(title: "", texts: [
+                            "yayasan mitra Hurcoa",
+                            "yayasan mitra Hurcoa",
+                            "yayasan mitra Hurcoa"
+                          ])
                         ],
                       ),
                     ),
@@ -211,11 +190,12 @@ class _HasilSurveyBState extends State<HasilSurveyB> {
                           ),
                         ],
                       ),
+                      // hasil2
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Jika Bangunan, dilampirkan:",
+                            "Syarat jika bantuan mobil/motor",
                             style: darkblueTextStyle.copyWith(
                               fontFamily: 'Poppins',
                               fontSize: 15,
@@ -261,18 +241,11 @@ class _HasilSurveyBState extends State<HasilSurveyB> {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 2),
-                          CustomPieChart(
-                            title: "",
-                            data: {
-                              "Ya": 70,
-                              "Tidak": 30,
-                            },
-                            colors: {
-                              "Ya": Colors.pinkAccent,
-                              "Tidak": Colors.red,
-                            },
-                          ),
+                          HasilTextField(title: "", texts: [
+                            "yayasan mitra Hurcoa",
+                            "yayasan mitra Hurcoa",
+                            "yayasan mitra Hurcoa"
+                          ])
                         ],
                       ),
                     ),
@@ -395,7 +368,7 @@ class _HasilSurveyBState extends State<HasilSurveyB> {
                           ),
                           child: GestureDetector(
                             onTap: () {
-                              Navigator.pushNamed(context, '/hasilsurveyc');
+                              Navigator.pushNamed(context, '/hasilsurveyd');
                             },
                             child: Container(
                               width: 40,
@@ -545,6 +518,6 @@ class BackArrowPainter extends CustomPainter {
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: HasilSurveyB(),
+    home: HasilSurveyC(),
   ));
 }

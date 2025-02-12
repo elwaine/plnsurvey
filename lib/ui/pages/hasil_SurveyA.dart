@@ -87,7 +87,6 @@ class _HasilSurveyAState extends State<HasilSurveyA> {
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
 
     if (image != null) {
-      // Here you can handle the picked image, e.g., display it or pass it to the backend
       print("Picked Image Path: ${image.path}");
     }
   }

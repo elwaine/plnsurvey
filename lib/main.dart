@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:plnsurvey/ui/pages/dashboard.dart';
 import 'package:plnsurvey/ui/pages/editpfp.dart';
+import 'package:plnsurvey/ui/pages/hasiil_SurveyE.dart';
 import 'package:plnsurvey/ui/pages/hasil_SurveyA.dart';
 import 'package:plnsurvey/ui/pages/hasil_SurveyB.dart';
+import 'package:plnsurvey/ui/pages/hasil_SurveyC.dart';
+import 'package:plnsurvey/ui/pages/hasil_SurveyD.dart';
+import 'package:plnsurvey/ui/pages/listsurvey.dart';
 import 'package:plnsurvey/ui/pages/surveyA.dart';
 import 'package:plnsurvey/ui/pages/login.dart';
 import 'package:plnsurvey/ui/pages/notif.dart';
@@ -27,7 +31,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => SplashScreen(),
         '/login-form': (context) => Login(),
-        '/dashboard': (context) => Dashboard(),
+        '/dashboard': (context) => SurveyDashboard(),
         '/profile': (context) => Profile(),
         '/editpfp': (context) => Editpfp(),
         '/surveyb': (context) => SurveyB(),
@@ -38,9 +42,12 @@ class MyApp extends StatelessWidget {
         '/surveya': (context) => SurveyPage(),
         '/hasilsurveya': (context) => HasilSurveyA(),
         '/hasilsurveyb': (context) => HasilSurveyB(),
-        // '/hasilsurveyc': (context) => HasilSurveyC(),
-        // '/hasilsurveyd': (context) => HasilSurveyD(),
-        // '/hasilsurveye': (context) => HasilSurveyE(),
+        '/hasilsurveyc': (context) => HasilSurveyC(),
+        '/hasilsurveyd': (context) => HasilSurveyD(),
+        '/hasilsurveye': (context) => HasilSurveyE(),
+        '/notifpage': (context) => NotificationPage(),
+        '/reportsurvey': (context) => ReportSurveyPage(),
+        '/listsurvey': (context) => ListSurveyPage(),
       },
     );
   }

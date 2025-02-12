@@ -63,7 +63,7 @@ class AddressFileWidget extends StatelessWidget {
                     "File",
                     style: darkblueTextStyle.copyWith(
                       fontSize: 14,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: black,
                     ),
                   ),
                 ),
@@ -97,7 +97,7 @@ class AddressFileWidget extends StatelessWidget {
                             file,
                             style: darkblueTextStyle.copyWith(
                               fontSize: 14,
-                              fontWeight: FontWeight.w500,
+                              fontWeight: black,
                             ),
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -111,29 +111,32 @@ class AddressFileWidget extends StatelessWidget {
           ),
           const SizedBox(height: 10),
 
-          // **Address Section**
           Column(
             children: addresses.map((address) {
-              return Container(
-                margin: const EdgeInsets.symmetric(vertical: 4),
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Color(0xffF2F8F9),
-                  borderRadius: BorderRadius.circular(8),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.05),
-                      blurRadius: 3,
-                      spreadRadius: 1,
-                      offset: const Offset(0, 2),
+              return Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                  width: double.infinity,
+                  margin: const EdgeInsets.symmetric(vertical: 4),
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Color(0xffF2F8F9),
+                    borderRadius: BorderRadius.circular(8),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.05),
+                        blurRadius: 3,
+                        spreadRadius: 1,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  child: Text(
+                    address,
+                    style: darkblueTextStyle.copyWith(
+                      fontSize: 14,
+                      fontWeight: black,
                     ),
-                  ],
-                ),
-                child: Text(
-                  address,
-                  style: darkblueTextStyle.copyWith(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
                   ),
                 ),
               );

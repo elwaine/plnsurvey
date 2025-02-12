@@ -175,7 +175,7 @@ class _SurveyE_ApproverState extends State<SurveyE_Approver> {
                             child: CustomButtonz(
                               title: 'Setujui',
                               onPressed: () {
-                                Navigator.pushNamed(context, '/surveya');
+                                Navigator.pushNamed(context, '/hasilsurveya');
                               },
                             ),
                           ),

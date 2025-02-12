@@ -16,7 +16,7 @@ class Login extends StatelessWidget {
       return CustomButton(
         title: 'Masuk',
         onPressed: () {
-          Navigator.pushNamed(context, '/surveya');
+          Navigator.pushNamed(context, '/dashboard');
         },
       );
     }
