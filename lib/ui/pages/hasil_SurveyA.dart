@@ -20,13 +20,11 @@ class CustomHeader extends StatelessWidget {
       child: Stack(
         clipBehavior: Clip.none,
         children: [
-          // Rectangle part of the header
           Container(
             width: screenWidth,
             height: 60,
             color: kPrimaryColor,
           ),
-          // Circle part of the header
           Align(
             alignment: Alignment.topCenter,
             child: Container(

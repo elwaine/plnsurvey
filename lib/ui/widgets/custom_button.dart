@@ -20,9 +20,9 @@ class CustomButton extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Container(
-      width: screenWidth * 0.2,
+      width: screenWidth * 0.6,
       height: screenHeight * 0.055,
-      margin: EdgeInsets.only(top: 50, left: 15, right: 15),
+      margin: EdgeInsets.only(top: 40, left: 4, right: 4),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [Color.fromARGB(213, 1, 146, 186), Color(0xff3BD2DD)],

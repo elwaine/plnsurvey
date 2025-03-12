@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plnsurvey/ui/pages/dashboard.dart';
+import 'package:plnsurvey/ui/pages/dashboardapprover.dart';
 import 'package:plnsurvey/ui/pages/editpfp.dart';
 import 'package:plnsurvey/ui/pages/hasiil_SurveyE.dart';
 import 'package:plnsurvey/ui/pages/hasil_SurveyA.dart';
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
         '/notifpage': (context) => NotificationPage(),
         '/reportsurvey': (context) => ReportSurveyPage(),
         '/listsurvey': (context) => ListSurveyPage(),
+        '/dashboardapprover': (context) => SurveyDashboardApprover(),
       },
     );
   }

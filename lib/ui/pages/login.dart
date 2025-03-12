@@ -11,7 +11,6 @@ class Login extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-    // Widgets for input fields and button
     Widget submitButton() {
       return CustomButton(
         title: 'Masuk',
@@ -49,11 +48,23 @@ class Login extends StatelessWidget {
 
             // Circle atas
             Positioned(
-              top: -20,
-              left: 0,
+              top: 0,
+              left: 13,
               child: Image.asset(
-                'assets/circleataslogin.png',
-                height: screenHeight * 0.2,
+                'assets/plnpeduli_login.png',
+                height: screenHeight * 0.1,
+                width: screenWidth * 0.27,
+                fit: BoxFit.contain,
+              ),
+            ),
+
+            // Decor atas
+            Positioned(
+              top: -32.6,
+              right: screenWidth * 0,
+              child: Image.asset(
+                'assets/colordecor_login.png',
+                height: screenHeight * 0.3,
                 width: screenWidth * 0.5,
                 fit: BoxFit.contain,
               ),
@@ -62,9 +73,9 @@ class Login extends StatelessWidget {
             // Circle bawah
             Positioned(
               bottom: -20,
-              right: -19,
+              right: screenWidth * 0.47,
               child: Image.asset(
-                'assets/circlebawahlogin.png',
+                'assets/decor_login.png',
                 height: screenHeight * 0.2,
                 width: screenWidth * 0.6,
                 fit: BoxFit.contain,

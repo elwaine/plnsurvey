@@ -6,12 +6,12 @@ class HalfCircleClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     final path = Path();
-    path.moveTo(0, size.height * 0.75);
+    path.moveTo(0, size.height * 0.7);
     path.quadraticBezierTo(
       size.width / 2,
       size.height * 1.2,
       size.width,
-      size.height * 0.75,
+      size.height * 0.72,
     );
     path.lineTo(size.width, 0);
     path.lineTo(0, 0);
@@ -35,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     Timer(const Duration(seconds: 4), () {
       Navigator.pushNamed(context, '/login-form');
-      // Navigator.pushNamed(context, '/dashboard');
+      //     // Navigator.pushNamed(context, '/dashboard');
     });
     super.initState();
   }
@@ -48,54 +48,71 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          // Background gradient
           Container(
             decoration: BoxDecoration(
               gradient: kPrimaryBackground,
             ),
           ),
-
           Positioned(
-            top: screenHeight * 0.6,
-            left: screenWidth * 0.08,
+            top: screenHeight * 0.52,
+            left: screenWidth * 0.09,
             child: SizedBox(
               width: screenWidth * 0.9,
               child: Image.asset(
-                'assets/tianglistrik.png',
+                'assets/tianglistrik_v2.png',
                 fit: BoxFit.fill,
               ),
             ),
           ),
-
           ClipPath(
             clipper: HalfCircleClipper(),
             child: Container(
               color: Colors.white,
-              height: screenHeight * 0.44,
+              height: screenHeight * 0.39,
               width: double.infinity,
             ),
           ),
-
           Positioned(
-            top: screenHeight * 0.48,
-            left: screenWidth * 0.055,
+            top: screenHeight * 0.41,
+            left: screenWidth * 0.15,
             child: SizedBox(
-              width: screenWidth * 0.5,
-              height: screenHeight * 0.08,
+              width: screenWidth * 0.85,
+              height: screenHeight * 0.135,
               child: Image.asset(
-                'assets/quotesplash.png',
+                'assets/quotesplash2.png',
                 fit: BoxFit.fill,
               ),
             ),
           ),
-
           Positioned(
-            top: screenHeight * 0.1,
-            left: screenWidth * 0.07,
+            top: screenHeight * 0.09,
+            left: screenWidth * 0.03,
             child: SizedBox(
-              width: screenWidth * 0.9,
+              width: screenWidth * 0.97,
               child: Image.asset(
-                'assets/logoplnsurvey.png',
+                'assets/plnsurvey_newlogo.png',
+                fit: BoxFit.contain,
+              ),
+            ),
+          ),
+          Positioned(
+            top: screenHeight * 0.02,
+            left: screenWidth * 0.72,
+            child: SizedBox(
+              width: screenWidth * 0.24,
+              child: Image.asset(
+                'assets/logo_plnpeduli.png',
+                fit: BoxFit.contain,
+              ),
+            ),
+          ),
+          Positioned(
+            top: screenHeight * 0.58,
+            left: screenWidth * 0,
+            child: SizedBox(
+              width: screenWidth * 0.97,
+              child: Image.asset(
+                'assets/decor_splash.png',
                 fit: BoxFit.contain,
               ),
             ),

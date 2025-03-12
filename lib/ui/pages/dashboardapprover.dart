@@ -5,10 +5,10 @@ import 'package:plnsurvey/ui/widgets/custom_button.dart';
 import 'package:plnsurvey/ui/widgets/surveycard.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MyApprover());
 }
 
-class MyApp extends StatelessWidget {
+class MyApprover extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,12 +16,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Poppins',
       ),
-      home: SurveyDashboard(),
+      home: SurveyDashboardApprover(),
     );
   }
 }
 
-class SurveyDashboard extends StatelessWidget {
+class SurveyDashboardApprover extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -55,7 +55,7 @@ class SurveyDashboard extends StatelessWidget {
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        "Daftar Form Yang Belum Diisi",
+                        "Survey Yang Perlu Disetujui",
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -166,7 +166,7 @@ class SurveyDashboard extends StatelessWidget {
           child: FloatingActionButton(
             backgroundColor: kPrimaryColor,
             onPressed: () {
-              Navigator.pushNamed(context, '/dashboardapprover');
+              Navigator.pushNamed(context, '/dashboard');
             },
             elevation: 0,
             child: Image.asset(
@@ -304,7 +304,7 @@ class _SurveyCardState extends State<SurveyCard>
                             horizontal: 12, vertical: 6),
                         decoration: BoxDecoration(
                           color: widget.isCompleted
-                              ? Colors.redAccent
+                              ? Color(0xff62DADE)
                               : Colors.grey[700],
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -566,14 +566,9 @@ class CustomHeader extends StatelessWidget {
               child: SizedBox(
                 width: screenWidth * 0.14,
                 height: screenHeight * 0.06,
-                child: InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/profile');
-                  },
-                  child: Image.asset(
-                    'assets/Customer.png',
-                    fit: BoxFit.fill,
-                  ),
+                child: Image.asset(
+                  'assets/Customer.png',
+                  fit: BoxFit.fill,
                 ),
               ),
             ),
@@ -649,7 +644,7 @@ class RecentlyViewedCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: 9.0),
               child: Text(
-                "Mendekati tenggat waktu",
+                "Yang Baru Saja Dilihat",
                 style: TextStyle(
                   color: kPrimaryColor,
                   fontWeight: FontWeight.w900,
