@@ -140,7 +140,7 @@ class _CustomRowRadioButtonzState extends State<CustomRowRadioButtonz> {
 
   String _getDynamicFieldLabel() {
     if (_selectedOption == "Layak") {
-      return "Alasan jika layak:";
+      return "Rekomendasi Besaran Bantuan(jika layak):";
     } else if (_selectedOption == "Tidak Layak") {
       return "Alasan jika tidak layak:";
     }
@@ -197,8 +197,9 @@ class _CustomRowRadioButtonzState extends State<CustomRowRadioButtonz> {
                   fontFamily: 'Poppins',
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
-                  color:
-                      _selectedOption == value ? kPrimaryColor : Colors.black,
+                  color: _selectedOption == value
+                      ? kPrimaryColor
+                      : kSurveyFontColor,
                 ),
               ),
             ),

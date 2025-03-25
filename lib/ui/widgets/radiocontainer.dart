@@ -5,20 +5,22 @@ class CustomRadioContainer extends StatefulWidget {
   final String title;
   final String hintText;
   final List<String> options;
-  final String? choice;
+  final String? selectedValue;
   final String? extraOptionLabel;
   final ValueChanged<String?>? onChanged;
-  final Widget? child; // ✅ Ensure child is included
+  final Widget? child;
+  final bool isDisabled;
 
   const CustomRadioContainer({
     Key? key,
     required this.title,
     required this.hintText,
     required this.options,
-    this.choice,
+    this.selectedValue,
     this.extraOptionLabel,
     this.onChanged,
     this.child,
+    this.isDisabled = false,
   }) : super(key: key);
 
   @override
@@ -26,21 +28,20 @@ class CustomRadioContainer extends StatefulWidget {
 }
 
 class _CustomRadioContainerState extends State<CustomRadioContainer> {
-  String? _selectedOption;
+  String? _selectedValue;
 
   @override
   void initState() {
     super.initState();
-    _selectedOption = widget.choice;
+    _selectedValue = widget.selectedValue;
   }
 
   void _handleSelection(String? value) {
+    if (widget.isDisabled) return;
     setState(() {
-      _selectedOption = value;
+      _selectedValue = value;
     });
-    if (widget.onChanged != null) {
-      widget.onChanged!(value);
-    }
+    widget.onChanged?.call(value);
   }
 
   @override
@@ -64,7 +65,6 @@ class _CustomRadioContainerState extends State<CustomRadioContainer> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // 📝 Title
           Text(
             widget.title,
             style: darkblueTextStyle.copyWith(
@@ -73,15 +73,11 @@ class _CustomRadioContainerState extends State<CustomRadioContainer> {
               fontWeight: black,
             ),
           ),
-
-          // 📝 Render child if it's not null
           if (widget.child != null) ...[
-            const SizedBox(height: 8), // Add spacing
+            const SizedBox(height: 8),
             widget.child!,
             const SizedBox(height: 12),
           ],
-
-          // 📝 Radio Buttons
           const SizedBox(height: 16),
           ...widget.options.map(
             (option) => Padding(
@@ -94,8 +90,6 @@ class _CustomRadioContainerState extends State<CustomRadioContainer> {
               ),
             ),
           ),
-
-          // 📝 Extra Option (If any)
           if (widget.extraOptionLabel != null)
             Padding(
               padding: const EdgeInsets.only(bottom: 12.0),
@@ -106,31 +100,26 @@ class _CustomRadioContainerState extends State<CustomRadioContainer> {
                 screenHeight: screenHeight,
               ),
             ),
-
-          // 📝 Extra Input Field for "Lainnya"
-          if (_selectedOption == "Input Lainnya")
+          if (_selectedValue == "Input Lainnya")
             TextFormField(
               cursorColor: kBlackColor,
               decoration: InputDecoration(
                 filled: true,
-                fillColor: Color(0xffF2F8F9),
+                fillColor: const Color(0xffF2F8F9),
                 contentPadding: const EdgeInsets.symmetric(
                   vertical: 7,
                   horizontal: 12,
                 ),
                 hintText: widget.hintText,
-                hintStyle: TextStyle(fontSize: 14),
+                hintStyle: const TextStyle(fontSize: 14),
+                enabled: !widget.isDisabled,
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(
-                    color: Colors.transparent,
-                  ),
+                  borderSide: const BorderSide(color: Colors.transparent),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(
-                    color: kPrimaryColor,
-                  ),
+                  borderSide: BorderSide(color: kPrimaryColor),
                 ),
               ),
             ),
@@ -144,7 +133,7 @@ class _CustomRadioContainerState extends State<CustomRadioContainer> {
       required String value,
       required double screenHeight}) {
     return GestureDetector(
-      onTap: () => _handleSelection(value),
+      onTap: widget.isDisabled ? null : () => _handleSelection(value),
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
         decoration: BoxDecoration(
@@ -154,34 +143,57 @@ class _CustomRadioContainerState extends State<CustomRadioContainer> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // 📝 Custom Circle Button
             Container(
               width: 16,
               height: 16,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: _selectedOption == value
-                      ? kPrimaryColor // Primary color when selected
-                      : Colors.black38, // Gray when unselected
+                  color: _selectedValue == value
+                      ? kPrimaryColor
+                      : kSurveyFontColor,
                   width: 2,
                 ),
               ),
-              child: _selectedOption == value
+              child: _selectedValue == value
                   ? Center(
                       child: Container(
                         width: 8,
                         height: 8,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: kPrimaryColor,
+                          border: Border.all(
+                            color: kPrimaryColor,
+                            width: 1.8,
+                          ),
+                        ),
+                        child: Center(
+                          child: Container(
+                            width: 5,
+                            height: 5,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: kPrimaryColor,
+                            ),
+                          ),
                         ),
                       ),
                     )
-                  : null,
+                  : Center(
+                      child: Container(
+                        width: 3.0,
+                        height: 8,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: kSurveyFontColor,
+                            width: 12.0,
+                          ),
+                        ),
+                      ),
+                    ),
             ),
             const SizedBox(width: 12),
-
             Expanded(
               child: Text(
                 title,
@@ -189,8 +201,9 @@ class _CustomRadioContainerState extends State<CustomRadioContainer> {
                   fontFamily: 'Poppins',
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
-                  color:
-                      _selectedOption == value ? kPrimaryColor : Colors.black,
+                  color: _selectedValue == value
+                      ? kPrimaryColor
+                      : kSurveyFontColor,
                 ),
               ),
             ),

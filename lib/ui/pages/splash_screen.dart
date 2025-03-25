@@ -35,6 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     Timer(const Duration(seconds: 4), () {
       Navigator.pushNamed(context, '/login-form');
+
       //     // Navigator.pushNamed(context, '/dashboard');
     });
     super.initState();
@@ -53,27 +54,27 @@ class _SplashScreenState extends State<SplashScreen> {
               gradient: kPrimaryBackground,
             ),
           ),
-          Positioned(
-            top: screenHeight * 0.52,
-            left: screenWidth * 0.09,
-            child: SizedBox(
-              width: screenWidth * 0.9,
-              child: Image.asset(
-                'assets/tianglistrik_v2.png',
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
+          // Positioned(
+          //   top: screenHeight * 0.52,
+          //   left: screenWidth * 0.09,
+          //   child: SizedBox(
+          //     width: screenWidth * 0.9,
+          //     child: Image.asset(
+          //       'assets/tianglistrik_v2.png',
+          //       fit: BoxFit.fill,
+          //     ),
+          //   ),
+          // ),
           ClipPath(
             clipper: HalfCircleClipper(),
             child: Container(
               color: Colors.white,
-              height: screenHeight * 0.39,
+              height: screenHeight * 0.5,
               width: double.infinity,
             ),
           ),
           Positioned(
-            top: screenHeight * 0.41,
+            top: screenHeight * 0.56,
             left: screenWidth * 0.15,
             child: SizedBox(
               width: screenWidth * 0.85,
@@ -85,7 +86,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
           ),
           Positioned(
-            top: screenHeight * 0.09,
+            top: screenHeight * 0.13,
             left: screenWidth * 0.03,
             child: SizedBox(
               width: screenWidth * 0.97,
@@ -107,12 +108,12 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
           ),
           Positioned(
-            top: screenHeight * 0.58,
-            left: screenWidth * 0,
+            top: screenHeight * 0.68,
+            left: screenWidth * 0.3,
             child: SizedBox(
-              width: screenWidth * 0.97,
+              width: screenWidth * 0.7,
               child: Image.asset(
-                'assets/decor_splash.png',
+                'assets/bungapln.png',
                 fit: BoxFit.contain,
               ),
             ),

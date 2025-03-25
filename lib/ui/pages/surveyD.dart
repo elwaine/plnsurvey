@@ -3,10 +3,12 @@ import 'package:plnsurvey/shared/theme.dart';
 import 'package:plnsurvey/ui/widgets/customcheckbox.dart';
 import 'package:plnsurvey/ui/widgets/radiocontainer.dart';
 import 'package:plnsurvey/ui/widgets/radiolainny.dart';
+import 'package:plnsurvey/ui/widgets/radiolainny_no_title.dart';
 import 'package:plnsurvey/ui/widgets/textfield.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:plnsurvey/ui/widgets/radiobuttonlist.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:plnsurvey/ui/widgets/textfield_no_title.dart';
 
 class Headerd extends StatelessWidget {
   const Headerd({super.key});
@@ -103,293 +105,140 @@ class _SurveyDState extends State<SurveyD> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 18),
-                    Container(
-                      padding: const EdgeInsets.all(16.0),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 2,
-                            spreadRadius: 2,
-                            offset: const Offset(0, 5),
-                          ),
-                        ],
+                    _buildQuestionContainer(
+                      number: 21,
+                      title:
+                          "Siapa pengelola bantuan? Apakah ada struktur organisasi pengelolanya?",
+                      child: SurveyTextField(
+                        hintText: "-",
                       ),
-                      child: SurveyTextFormField(
-                        title:
-                            "Siapa pengelola bantuan? Apakah ada struktur organisasi pengelolanya?",
+                    ),
+                    SizedBox(height: 18),
+                    _buildQuestionContainer(
+                      number: 22,
+                      title:
+                          "Jika bantuan berupa transfer dana? Komitmen akan 2 direalisasikan segera dan dilaporkan realisasinya (Laporan Pertanggungjawaban/LPJ)",
+                      child: CustomRadioButtonns(
+                        options: ["Ya, berkomitmen", "Tidak berkomitmen"],
+                        hintText: "-",
+                      ),
+                    ),
+                    SizedBox(height: 18),
+                    _buildQuestionContainer(
+                      number: 23,
+                      title:
+                          "Jika bantuan berupa transfer dana, maka berkomimen akan merealisasikan sesuai dengan proposal usulkan dan yang disetujui dari pihak PLN",
+                      child: CustomRadioButtonns(
+                        options: ["Ya, berkomitmen", "Tidak berkomitmen"],
+                        hintText: "-",
+                      ),
+                    ),
+                    SizedBox(height: 18),
+                    _buildQuestionContainer(
+                      number: 24,
+                      title:
+                          "Jika bantuan barang. Komitmen barang bantuan dipergunakan 4 untuk kemanfaatan kelompok/masyarakat bukan untuk kepentingan pribadi",
+                      child: CustomRadioButtonns(
+                        options: ["Bersedia", "Tidak bersedia"],
+                        hintText: "-",
+                      ),
+                    ),
+                    SizedBox(height: 18),
+                    _buildQuestionContainer(
+                      number: 25,
+                      title:
+                          "Jika dibantu maka barang bantuan/bangunan/lokasi penerima bantuan akan dibranding Bantuan PLN Peduli",
+                      child: CustomRadioButtonns(
+                        options: ["Bersedia", "Tidak bersedia"],
+                        hintText: "-",
+                      ),
+                    ),
+                    SizedBox(height: 18),
+                    _buildQuestionContainer(
+                      number: 26,
+                      title:
+                          "Berkomitmen kemanfaatan bantuan minimal dapat dipergunakan selama 5 tahun dan diharapkan dapat lebih.",
+                      child: CustomRadioButtonns(
+                        options: ["Bersedia", "Tidak bersedia"],
+                        hintText: "-",
+                      ),
+                    ),
+                    SizedBox(height: 18),
+                    _buildQuestionContainer(
+                      number: 27,
+                      title:
+                          "Jika sudah merealisasikan bantuan, maka penerima manfaat 7 wajib untuk menyampaikan laporan secara tertulis kepada PLN selambat-lambatnya 3 (tiga) bulan",
+                      child: CustomRadioButtonns(
+                        options: ["Bersedia", "Tidak bersedia"],
+                        hintText: "-",
+                      ),
+                    ),
+                    SizedBox(height: 18),
+                    _buildQuestionContainer(
+                      number: 28,
+                      title: "Apakah ada sumber dana lain selain dari PLN?",
+                      child: SurveyTextField(
                         hintText: "Masukkan Jawaban Anda",
                       ),
                     ),
                     SizedBox(height: 18),
-                    Container(
-                      padding: const EdgeInsets.all(16.0),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 2,
-                            spreadRadius: 2,
-                            offset: const Offset(0, 5),
-                          ),
-                        ],
-                      ),
-                      child: SurveyTextFormField(
-                        title:
-                            "Jika bantuan berupa transfer dana? Komitmen akan 2 direalisasikan segera dan dilaporkan realisasinya (Laporan Pertanggungjawaban/LPJ)",
+                    _buildQuestionContainer(
+                      number: 29,
+                      title:
+                          "Diyakinkan dan dipastikan tidak ada overlap pendanaan",
+                      child: CustomRadioButtonns(
+                        options: ["Bersedia", "Tidak bersedia"],
                         hintText: "Masukkan Jawaban Anda",
                       ),
                     ),
                     SizedBox(height: 18),
-                    Container(
-                      padding: const EdgeInsets.all(16.0),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 2,
-                            spreadRadius: 2,
-                            offset: const Offset(0, 5),
-                          ),
-                        ],
-                      ),
-                      child: SurveyTextFormField(
-                        title:
-                            "Jika bantuan berupa transfer dana, maka berkomimen akan 3 merealisasikan sesuai dengan proposal usulkan dan yang disetujui dari pihak PLN",
+                    _buildQuestionContainer(
+                      number: 30,
+                      title:
+                          "Apakah punya pengalaman dalam mengelola dana bantuan sebelumnya?",
+                      child: CustomRadioButtonns(
+                        options: ["Berpengalaman", "Kurang berpengalaman"],
                         hintText: "Masukkan Jawaban Anda",
                       ),
                     ),
                     SizedBox(height: 18),
-                    Container(
-                      padding: const EdgeInsets.all(16.0),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 2,
-                            spreadRadius: 2,
-                            offset: const Offset(0, 5),
-                          ),
-                        ],
-                      ),
-                      child: SurveyTextFormField(
-                        title:
-                            "Jika bantuan barang. Komitmen barang bantuan dipergunakan 4 untuk kemanfaatan kelompok/ masyarakat bukan untuk kepentingan pribadi",
+                    _buildQuestionContainer(
+                      number: 31,
+                      title: "Apakah mempunyai ijin kegiatan organisasi?",
+                      child: CustomRadioButtonns(
+                        options: ["Ya", "Tidak"],
                         hintText: "Masukkan Jawaban Anda",
                       ),
                     ),
                     SizedBox(height: 18),
-                    Container(
-                      padding: const EdgeInsets.all(16.0),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 2,
-                            spreadRadius: 2,
-                            offset: const Offset(0, 5),
-                          ),
-                        ],
-                      ),
-                      child: SurveyTextFormField(
-                        title:
-                            "Jika dibantu maka barang bantuan/bangunan/lokasi penerima bantuan akan dibranding Bantuan PLN Peduli",
+                    _buildQuestionContainer(
+                      number: 32,
+                      title: "Apakah mempunyai ijin pemanfaatan lahan?",
+                      child: CustomRadioButtonns(
+                        options: ["Ya", "Tidak"],
                         hintText: "Masukkan Jawaban Anda",
                       ),
                     ),
                     SizedBox(height: 18),
-                    Container(
-                      padding: const EdgeInsets.all(16.0),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 2,
-                            spreadRadius: 2,
-                            offset: const Offset(0, 5),
-                          ),
-                        ],
-                      ),
-                      child: SurveyTextFormField(
-                        title:
-                            "Berkomitmen kemanfaatan bantuan minimal dapat dipergunakan selama 5 tahun dan diharapkan dapat lebih.",
+                    _buildQuestionContainer(
+                      number: 33,
+                      title: "Status kepelikan lahan?",
+                      child: CustomRadioButtonns(
+                        options: ["Yayasan", "Masyarakat"],
+                        extraOptionLabel: "Lainnya : ____________________",
+                        onChanged: (value) {
+                          print("Selected: $value");
+                        },
                         hintText: "Masukkan Jawaban Anda",
                       ),
                     ),
                     SizedBox(height: 18),
-                    Container(
-                      padding: const EdgeInsets.all(16.0),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 2,
-                            spreadRadius: 2,
-                            offset: const Offset(0, 5),
-                          ),
-                        ],
-                      ),
-                      child: SurveyTextFormField(
-                        title:
-                            "Jika sudah merealisasikan bantuan, maka penerima manfaat 7 wajib untuk menyampaikan laporan secara tertulis kepada PLN selambat-lambatnya 3 (tiga) bulan",
-                        hintText: "Masukkan Jawaban Anda",
-                      ),
-                    ),
-                    SizedBox(height: 18),
-                    Container(
-                      padding: const EdgeInsets.all(16.0),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 2,
-                            spreadRadius: 2,
-                            offset: const Offset(0, 5),
-                          ),
-                        ],
-                      ),
-                      child: SurveyTextFormField(
-                        title: "Apakah ada sumber dana lain selain dari PLN?",
-                        hintText: "Masukkan Jawaban Anda",
-                      ),
-                    ),
-                    SizedBox(height: 18),
-                    Container(
-                      padding: const EdgeInsets.all(16.0),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 2,
-                            spreadRadius: 2,
-                            offset: const Offset(0, 5),
-                          ),
-                        ],
-                      ),
-                      child: SurveyTextFormField(
-                        title:
-                            "Diyakinkan dan dipastikan tidak ada overlap pendanaan",
-                        hintText: "Masukkan Jawaban Anda",
-                      ),
-                    ),
-                    SizedBox(height: 18),
-                    Container(
-                      padding: const EdgeInsets.all(16.0),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 2,
-                            spreadRadius: 2,
-                            offset: const Offset(0, 5),
-                          ),
-                        ],
-                      ),
-                      child: SurveyTextFormField(
-                        title:
-                            "Apakah punya pengalaman dalam mengelola dana bantuan sebelumnya?",
-                        hintText: "Masukkan Jawaban Anda",
-                      ),
-                    ),
-                    SizedBox(height: 18),
-                    Container(
-                      padding: const EdgeInsets.all(16.0),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 2,
-                            spreadRadius: 2,
-                            offset: const Offset(0, 5),
-                          ),
-                        ],
-                      ),
-                      child: SurveyTextFormField(
-                        title: "Apakah mempunyai ijin kegiatan organisasi?",
-                        hintText: "Masukkan Jawaban Anda",
-                      ),
-                    ),
-                    SizedBox(height: 18),
-                    Container(
-                      padding: const EdgeInsets.all(16.0),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 2,
-                            spreadRadius: 2,
-                            offset: const Offset(0, 5),
-                          ),
-                        ],
-                      ),
-                      child: SurveyTextFormField(
-                        title: "Apakah mempunyai ijin pemanfaatan lahan?",
-                        hintText: "Masukkan Jawaban Anda",
-                      ),
-                    ),
-                    SizedBox(height: 18),
-                    Container(
-                      padding: const EdgeInsets.all(16.0),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 2,
-                            spreadRadius: 2,
-                            offset: const Offset(0, 5),
-                          ),
-                        ],
-                      ),
-                      child: SurveyTextFormField(
-                        title: "Status kepelikan lahan?",
-                        hintText: "Masukkan Jawaban Anda",
-                      ),
-                    ),
-                    SizedBox(height: 18),
-                    Container(
-                      padding: const EdgeInsets.all(16.0),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 2,
-                            spreadRadius: 2,
-                            offset: const Offset(0, 5),
-                          ),
-                        ],
-                      ),
-                      child: SurveyTextFormField(
-                        title:
-                            "Apakah terdapat ketersediaan tenaga/vendor pelaksanaan bantuan?",
+                    _buildQuestionContainer(
+                      number: 34,
+                      title:
+                          "Apakah terdapat ketersediaan tenaga/vendor pelaksanaan bantuan?",
+                      child: CustomRadioButtonns(
+                        options: ["Ya", "Tidak"],
                         hintText: "Masukkan Jawaban Anda",
                       ),
                     ),
@@ -537,6 +386,58 @@ class _SurveyDState extends State<SurveyD> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildQuestionContainer({
+    required int number,
+    required String title,
+    required Widget child,
+  }) {
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 2,
+            spreadRadius: 2,
+            offset: const Offset(0, 5),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "$number. ", // Number
+                style: darkblueTextStyle.copyWith(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+              const SizedBox(width: 4),
+              Expanded(
+                child: Text(
+                  title,
+                  style: darkblueTextStyle.copyWith(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w900,
+                  ),
+                  softWrap: true,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          child,
+        ],
       ),
     );
   }

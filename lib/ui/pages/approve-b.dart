@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:plnsurvey/shared/theme.dart';
-import 'package:plnsurvey/ui/widgets/custom_button_table.dart';
-import 'package:plnsurvey/ui/widgets/custom_table.dart';
 import 'package:plnsurvey/ui/widgets/customcheckbox.dart';
-import 'package:plnsurvey/ui/widgets/customnotecard.dart';
-import 'package:plnsurvey/ui/widgets/customrowradio.dart';
 import 'package:plnsurvey/ui/widgets/radiocontainer.dart';
-import 'package:plnsurvey/ui/widgets/radiocontainer_pageE.dart';
 import 'package:plnsurvey/ui/widgets/radiolainny.dart';
 import 'package:plnsurvey/ui/widgets/textfield.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:plnsurvey/ui/widgets/radiobuttonlist.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class Headerd extends StatelessWidget {
-  const Headerd({super.key});
+class Headerb extends StatelessWidget {
+  const Headerb({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -71,36 +67,62 @@ class Headerd extends StatelessWidget {
   }
 }
 
-class SurveyE extends StatefulWidget {
+class ApproveB extends StatefulWidget {
   @override
-  _SurveyEState createState() => _SurveyEState();
+  _ApproveBState createState() => _ApproveBState();
 }
 
-class _SurveyEState extends State<SurveyE> {
+class _ApproveBState extends State<ApproveB> {
   String jenisBantuan = "";
   String koordinat = "";
-  String day = '';
-  String month = '';
-  String year = '';
+  String informasiLainnya = "";
+  bool isSubmitted = false;
 
-  Future<void> _pickImageFromGallery() async {
-    final ImagePicker picker = ImagePicker();
-    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+  @override
+  void initState() {
+    super.initState();
+    _loadSavedResponses();
+  }
 
-    if (image != null) {
-      print("Picked Image Path: ${image.path}");
-    }
+  // Load saved responses from shared_preferences
+  Future<void> _loadSavedResponses() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      jenisBantuan = prefs.getString("jenisBantuan") ?? "";
+      koordinat = prefs.getString("koordinat") ?? "";
+      informasiLainnya = prefs.getString("informasiLainnya") ?? "";
+      isSubmitted = prefs.getBool("isSubmitted") ?? false;
+    });
+  }
+
+  // Save responses locally
+  Future<void> _saveResponses() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString("jenisBantuan", jenisBantuan);
+    await prefs.setString("koordinat", koordinat);
+    await prefs.setString("informasiLainnya", informasiLainnya);
+  }
+
+  // Submit form (locks editing)
+  Future<void> _submitForm() async {
+    await _saveResponses();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool("isSubmitted", true);
+    setState(() {
+      isSubmitted = true;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: kSurveyBgColor,
       body: Column(
         children: [
-          Headerd(),
+          Headerb(),
           Expanded(
             child: SingleChildScrollView(
               child: Padding(
@@ -108,80 +130,73 @@ class _SurveyEState extends State<SurveyE> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 18),
-                    CustomRowRadioButtonz(
-                      title: "35.  Kesimpulan",
-                      hintText: "-",
-                      options: ["Layak", "Tidak Layak"],
-                      choice: null,
+                    CustomRadioContainer(
+                      title: "Jenis Bantuan",
+                      hintText: "Specify",
+                      options: ["Ya", "Tidak"],
+                      isDisabled: isSubmitted,
                       onChanged: (value) {
-                        print("Selected: $value");
+                        if (!isSubmitted) {
+                          setState(() {
+                            jenisBantuan = value ?? "Ya";
+                          });
+                        }
                       },
+                      selectedValue: jenisBantuan,
                     ),
-                    SizedBox(height: 18),
-                    SurveyNoteCard(
-                      title: "36  Catatan Survey",
-                      topContent:
-                          "diperlukan jika program layak dibantu namun dengan catatan dan menjawab atau memastikan catatan di form evaluasi awal di lapangan",
-                      bottomHintText: "Tambahkan catatan Anda di sini...",
-                      backgroundColor: Colors.white,
+                    SizedBox(height: 16),
+                    CustomRadioContainer(
+                      title: "Koordinat Lokasi",
+                      hintText: "Masukkan Koordinat",
+                      options: ["Ya", "Tidak"],
+                      isDisabled: isSubmitted,
+                      onChanged: (value) {
+                        if (!isSubmitted) {
+                          setState(() {
+                            koordinat = value ?? "Ya";
+                          });
+                        }
+                      },
+                      selectedValue: koordinat,
                     ),
-                    SizedBox(height: 18),
-                    Column(
-                      children: [SurveyTeamWidget()],
+                    SizedBox(height: 16),
+                    Container(
+                      padding: const EdgeInsets.all(16.0),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 2,
+                            spreadRadius: 2,
+                            offset: Offset(0, 5),
+                          ),
+                        ],
+                      ),
+                      child: SurveyTextFormField(
+                        title: "Informasi Lainnya",
+                        hintText: "Masukkan Catatan (jika ada)",
+                        controller:
+                            TextEditingController(text: informasiLainnya),
+                        isDisabled: isSubmitted,
+                        onChanged: (value) {
+                          if (!isSubmitted) {
+                            setState(() {
+                              informasiLainnya = value;
+                            });
+                          }
+                        },
+                      ),
                     ),
-                    // SizedBox(height: 18),
-                    // CustomRadioContainerE(
-                    //   title:
-                    //       "apakah anda bersedia menyetujui semua syarat yang berlaku?",
-                    //   options: ["1", "2", "3", "4", "5"],
-                    // ),
                     SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        // Back Button (Left Side)
-                        // Back Button (Left Side)
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: kPrimaryColor,
-                              shape: BoxShape.circle,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.2),
-                                  blurRadius: 0.5,
-                                  spreadRadius: 0.5,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: CustomPaint(
-                              painter: BackArrowPainter(),
-                            ),
+                    isSubmitted
+                        ? Text("Survey telah dikirim!",
+                            style: TextStyle(color: Colors.green))
+                        : ElevatedButton(
+                            onPressed: _submitForm,
+                            child: Text("Kirim"),
                           ),
-                        ),
-                        // Approve Button (Right Side)
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16.0, vertical: 8),
-                            child: CustomButtonz(
-                              title: 'Submit',
-                              onPressed: () {
-                                Navigator.pushNamed(
-                                    context, '/surveye-approver');
-                              },
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               ),
@@ -260,54 +275,6 @@ class _SurveyEState extends State<SurveyE> {
       ),
     );
   }
-
-  Widget _buildQuestionContainer({
-    required int number,
-    required String title,
-    required Widget child,
-  }) {
-    return Container(
-      padding: const EdgeInsets.all(16.0),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 2,
-            spreadRadius: 2,
-            offset: const Offset(0, 5),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "$number. ", // Number
-                style: darkblueTextStyle.copyWith(
-                    fontSize: 15, fontWeight: FontWeight.w900),
-              ),
-              const SizedBox(width: 4),
-              Expanded(
-                child: Text(
-                  title,
-                  style: darkblueTextStyle.copyWith(
-                      fontSize: 14, fontWeight: FontWeight.w900),
-                  softWrap: true,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          child,
-        ],
-      ),
-    );
-  }
 }
 
 class ArrowPainter extends CustomPainter {
@@ -355,6 +322,6 @@ class BackArrowPainter extends CustomPainter {
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: SurveyE(),
+    home: ApproveB(),
   ));
 }

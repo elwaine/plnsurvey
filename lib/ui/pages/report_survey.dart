@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:plnsurvey/shared/theme.dart';
+import 'package:plnsurvey/ui/widgets/custom_bar_chart.dart';
+import 'package:plnsurvey/ui/widgets/custom_bar_chart_cardz.dart';
+import 'package:plnsurvey/ui/widgets/custom_location_card.dart';
+import 'package:plnsurvey/ui/widgets/custom_pie_cardnotrbanyak.dart';
+import 'package:plnsurvey/ui/widgets/custom_pie_chart.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -31,7 +36,7 @@ class _ReportSurveyPageState extends State<ReportSurveyPage> {
       body: Column(
         children: [
           CustomHeader(),
-          SearchBar(searchController: searchController),
+          // SearchBar(searchController: searchController),
           SizedBox(height: 16),
           Expanded(
             child: Container(
@@ -51,22 +56,83 @@ class _ReportSurveyPageState extends State<ReportSurveyPage> {
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 25),
                   physics: BouncingScrollPhysics(),
                   children: [
-                    ReportSection(
-                      date: 'Desember',
-                      notifications: [
-                        ReportItem(title: 'Nama Form', date: '20 Des 2024'),
-                        ReportItem(title: 'Nama Form', date: '20 Des 2024'),
-                        ReportItem(title: 'Nama Form', date: '20 Des 2024'),
-                      ],
+                    Align(
+                      alignment: Alignment.center,
+                      child: ShaderMask(
+                        shaderCallback: (bounds) => LinearGradient(
+                          colors: [Color(0xff1BA0B6), Color(0xff1FD696)],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ).createShader(bounds),
+                        child: Text(
+                          "Rekapitulasi Program TJSL",
+                          style: darkblueTextStyle.copyWith(
+                            fontSize: 19,
+                            fontWeight: FontWeight.w900,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
                     ),
-                    ReportSection(
-                      date: 'November',
-                      notifications: [
-                        ReportItem(title: 'Nama Form', date: '20 Des 2024'),
-                        ReportItem(title: 'Nama Form', date: '20 Des 2024'),
-                      ],
+                    SizedBox(height: 10),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 20),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 3, horizontal: 10),
+                          decoration: BoxDecoration(
+                            color: Color(0xFF1FA8B3),
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          child: Text(
+                            '2024',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
-                    SizedBox(height: 50),
+                    SizedBox(height: 10),
+                    CustomBarChartCardz(
+                      title: "Program TJSL Tahun 2024",
+                      data: {
+                        "Sulawesi Barat": 5,
+                        "Sulawesi Selatan": 3,
+                        "Sulawesi Tengah": 4,
+                      },
+                      colors: {
+                        "Sulawesi Barat": Colors.cyan,
+                        "Sulawesi Selatan": Colors.pink,
+                        "Sulawesi Tengah": Colors.blue,
+                      },
+                    ),
+                    SizedBox(height: 16),
+                    CustomPieChartCardsz(
+                      title: "Realisasi Program TJSL Tahun 2024",
+                      data: {
+                        "Sulawesi Barat": 20,
+                        "Sulawesi Tengah": 70,
+                        "Sulawesi Selatan": 10,
+                      },
+                      colors: {
+                        "Sulawesi Tengah": Colors.lime,
+                        "Sulawesi Selatan": Colors.pinkAccent,
+                        "Sulawesi Barat": Colors.amberAccent,
+                      },
+                    ),
+                    SizedBox(height: 16),
+                    LocationCard(
+                      location: '7605, KAB. MAJENE, SULAWESI BARAT',
+                      onPressed: () {
+                        print('Lihat Data clicked!');
+                      },
+                    ),
+                    SizedBox(height: 30),
                   ],
                 ),
               ),
@@ -153,8 +219,8 @@ class CustomHeader extends StatelessWidget {
     return Container(
       color: kPrimaryColor,
       padding: EdgeInsets.only(
-        top: MediaQuery.of(context).padding.top + 10,
-        bottom: 20,
+        top: MediaQuery.of(context).padding.top + 40,
+        bottom: 40,
       ),
       child: Row(
         children: [
@@ -189,47 +255,47 @@ class CustomHeader extends StatelessWidget {
   }
 }
 
-class SearchBar extends StatelessWidget {
-  final TextEditingController searchController;
+// class SearchBar extends StatelessWidget {
+//   final TextEditingController searchController;
 
-  const SearchBar({required this.searchController});
+//   const SearchBar({required this.searchController});
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(30),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black12,
-              blurRadius: 4,
-              offset: Offset(0, 2),
-            ),
-          ],
-        ),
-        child: TextField(
-          controller: searchController,
-          decoration: InputDecoration(
-            hintText: "Search",
-            prefixIcon: Padding(
-              padding: EdgeInsets.only(left: 16, right: 8),
-              child: Icon(Icons.search, color: Colors.grey),
-            ),
-            suffixIcon: Padding(
-              padding: EdgeInsets.only(left: 8, right: 16),
-              child: Icon(Icons.tune, color: Colors.grey),
-            ),
-            border: InputBorder.none,
-            contentPadding: EdgeInsets.symmetric(vertical: 14, horizontal: 10),
-          ),
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+//       child: Container(
+//         decoration: BoxDecoration(
+//           color: Colors.white,
+//           borderRadius: BorderRadius.circular(30),
+//           boxShadow: [
+//             BoxShadow(
+//               color: Colors.black12,
+//               blurRadius: 4,
+//               offset: Offset(0, 2),
+//             ),
+//           ],
+//         ),
+//         child: TextField(
+//           controller: searchController,
+//           decoration: InputDecoration(
+//             hintText: "Search",
+//             prefixIcon: Padding(
+//               padding: EdgeInsets.only(left: 16, right: 8),
+//               child: Icon(Icons.search, color: Colors.grey),
+//             ),
+//             suffixIcon: Padding(
+//               padding: EdgeInsets.only(left: 8, right: 16),
+//               child: Icon(Icons.tune, color: Colors.grey),
+//             ),
+//             border: InputBorder.none,
+//             contentPadding: EdgeInsets.symmetric(vertical: 14, horizontal: 10),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 class ReportItem extends StatelessWidget {
   final String title;

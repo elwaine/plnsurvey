@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../shared/theme.dart';
 
-class SurveyTextFormField extends StatelessWidget {
-  final String title;
+class SurveyTextField extends StatelessWidget {
   final String hintText;
   final bool obscureText;
   final bool? enabled;
@@ -10,9 +9,8 @@ class SurveyTextFormField extends StatelessWidget {
   final ValueChanged<String>? onChanged; // ✅ Add onChanged
   final bool? isDisabled; // ✅ Add isDisabled
 
-  const SurveyTextFormField({
+  const SurveyTextField({
     Key? key,
-    required this.title,
     required this.hintText,
     this.obscureText = false,
     this.enabled,
@@ -28,22 +26,12 @@ class SurveyTextFormField extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            title,
-            style: darkblueTextStyle.copyWith(
-              fontFamily: 'Poppins',
-              fontSize: 15,
-              fontWeight: black,
-            ),
-          ),
-          const SizedBox(height: 5),
           TextFormField(
             controller: controller,
             cursorColor: kBlackColor,
             obscureText: obscureText,
-            enabled:
-                isDisabled == true ? false : enabled, // ✅ Support isDisabled
-            onChanged: onChanged, // ✅ Support onChanged
+            enabled: isDisabled == true ? false : enabled,
+            onChanged: onChanged,
             decoration: InputDecoration(
               filled: true,
               fillColor: const Color(0xffF2F8F9),

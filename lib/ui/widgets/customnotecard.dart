@@ -68,11 +68,10 @@ class SurveyNoteCard extends StatelessWidget {
             child: Text(
               topContent,
               style: contentStyle ??
-                  const TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 14,
-                    color: Colors.black87,
-                  ),
+                  darkblueTextStyle.copyWith(
+                      fontFamily: 'Poppins',
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600),
             ),
           ),
 

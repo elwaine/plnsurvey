@@ -197,7 +197,7 @@ class SurveyDashboard extends StatelessWidget {
                     height: 30,
                   ),
                   onPressed: () {
-                    // Add logic here
+                    Navigator.pushNamed(context, '/hasilsurveya');
                   },
                 ),
               ),
@@ -210,7 +210,7 @@ class SurveyDashboard extends StatelessWidget {
                     height: 30,
                   ),
                   onPressed: () {
-                    // Add logic here
+                    Navigator.pushNamed(context, '/approve-a');
                   },
                 ),
               ),
@@ -388,6 +388,7 @@ class _SurveyCardState extends State<SurveyCard>
 class Sidebar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
     return Drawer(
       child: Stack(
         children: [
@@ -398,81 +399,125 @@ class Sidebar extends StatelessWidget {
             ),
           ),
           Container(
-            color: Color(0xFF14A2BA).withOpacity(0.8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                DrawerHeader(
-                  decoration: BoxDecoration(color: Colors.transparent),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CircleAvatar(
-                        radius: 30,
-                        backgroundColor: Colors.white,
-                        child: Icon(Icons.person,
-                            size: 40, color: Color(0xFF14A2BA)),
-                      ),
-                      SizedBox(height: 16),
-                      Text(
-                        "Naylafilsah Haryadi",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color(0xFF14A2BA),
+                  Color(0xFF31EEDD),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    DrawerHeader(
+                      decoration: BoxDecoration(color: Colors.transparent),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/profile');
+                        },
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CircleAvatar(
+                              radius: 30,
+                              backgroundColor: Colors.white,
+                              child: Icon(Icons.person,
+                                  size: 40, color: Color(0xFF14A2BA)),
+                            ),
+                            SizedBox(height: 16),
+                            Text(
+                              "Naylafilsah Haryadi",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                            Text(
+                              "naylafilsah2008@gmail.com",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      Text(
-                        "naylafilsah2008@gmail.com",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                        ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 16.0),
+                      child: Container(
+                        height: 1.5,
+                        width: screenWidth * 0.9,
+                        color: Colors.white,
+                        margin: EdgeInsets.only(bottom: 20),
                       ),
-                    ],
-                  ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            leading: Icon(Icons.check_box,
+                                color: Colors.white, size: 28),
+                            title: Text(
+                              "Daftar Form",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 16),
+                            ),
+                            onTap: () {
+                              Navigator.popAndPushNamed(context, '/dashboard');
+                            },
+                          ),
+                          ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            leading: Icon(Icons.table_chart,
+                                color: Colors.white, size: 28),
+                            title: Text(
+                              "Report Survey",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 16),
+                            ),
+                            onTap: () {
+                              Navigator.pushNamed(context, '/reportsurvey');
+                            },
+                          ),
+                          ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            leading: Icon(Icons.logout,
+                                color: Colors.white, size: 28),
+                            title: Text(
+                              "Keluar Akun",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 16),
+                            ),
+                            onTap: () {
+                              Navigator.pushNamed(context, '/login-form');
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    Transform.translate(
+                      offset: Offset(35, 120),
+                      child: Image.asset(
+                        'assets/tianglistrikPt2.png',
+                        height: 500,
+                        width: double.infinity,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ],
                 ),
-                ListTile(
-                  leading: Icon(Icons.check_box, color: Colors.white),
-                  title: Text(
-                    "Daftar Form",
-                    style: TextStyle(color: Colors.white, fontSize: 14),
-                  ),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  leading: Icon(Icons.table_chart, color: Colors.white),
-                  title: Text(
-                    "Report Survey",
-                    style: TextStyle(color: Colors.white, fontSize: 14),
-                  ),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  leading: Icon(Icons.logout, color: Colors.white),
-                  title: Text(
-                    "Keluar Akun",
-                    style: TextStyle(color: Colors.white, fontSize: 14),
-                  ),
-                  onTap: () {
-                    Navigator.pushNamed(context, '/login-form');
-                  },
-                ),
-                Transform.translate(
-                  offset: Offset(35, 120),
-                  child: Image.asset(
-                    'assets/tianglistrikPt2.png',
-                    height: 500,
-                    width: double.infinity,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-                Spacer(),
-              ],
+              ),
             ),
           ),
         ],
@@ -623,6 +668,7 @@ class RecentlyViewedCard extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16),
       child: Container(
@@ -638,7 +684,6 @@ class RecentlyViewedCard extends StatelessWidget {
             ),
           ],
           border: Border.all(
-            // Thin outline border
             color: Colors.grey.withOpacity(0.5),
             width: 0.8,
           ),
@@ -658,58 +703,62 @@ class RecentlyViewedCard extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.15),
-                    blurRadius: 5,
-                    offset: Offset(0, 3),
-                  ),
-                ],
-                border: Border.all(
-                  // Thin outline border
-                  color: Colors.grey.withOpacity(0.5),
-                  width: 0.8,
-                ),
-              ),
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: screenWidth * 0.12,
-                    height: screenHeight * 0.055,
-                    child: Image.asset(
-                      'assets/bluefile_icon.png',
-                      fit: BoxFit.fill,
+            GestureDetector(
+              onTap: () {
+                Navigator.popAndPushNamed(context, '/surveya');
+              },
+              child: Container(
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.15),
+                      blurRadius: 5,
+                      offset: Offset(0, 3),
                     ),
+                  ],
+                  border: Border.all(
+                    color: Colors.grey.withOpacity(0.5),
+                    width: 0.8,
                   ),
-                  SizedBox(width: 8),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Nama Form",
-                        style: TextStyle(
-                          color: kPrimaryColor,
-                          fontWeight: FontWeight.w900,
-                          fontSize: 17.9,
-                          fontFamily: 'Poppins',
-                        ),
+                ),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: screenWidth * 0.12,
+                      height: screenHeight * 0.055,
+                      child: Image.asset(
+                        'assets/bluefile_icon.png',
+                        fit: BoxFit.fill,
                       ),
-                      Text(
-                        "20 Des 2024",
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 14,
-                          fontFamily: 'Poppins',
+                    ),
+                    SizedBox(width: 8),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Nama Form",
+                          style: TextStyle(
+                            color: kPrimaryColor,
+                            fontWeight: FontWeight.w900,
+                            fontSize: 17.9,
+                            fontFamily: 'Poppins',
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                        Text(
+                          "20 Des 2024",
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 14,
+                            fontFamily: 'Poppins',
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

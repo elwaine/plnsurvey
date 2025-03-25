@@ -3,6 +3,7 @@ import 'package:plnsurvey/shared/theme.dart';
 import 'package:plnsurvey/ui/widgets/customcheckbox.dart';
 import 'package:plnsurvey/ui/widgets/radiocontainer.dart';
 import 'package:plnsurvey/ui/widgets/radiolainny.dart';
+import 'package:plnsurvey/ui/widgets/radiolainny_no_title.dart';
 import 'package:plnsurvey/ui/widgets/textfield.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:plnsurvey/ui/widgets/radiobuttonlist.dart';
@@ -103,20 +104,23 @@ class _SurveyBState extends State<SurveyB> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CustomRadioContainer(
+                    _buildQuestionContainer(
+                      number: 16,
                       title:
-                          "Melengkapi Akta Pendirian Yayasan organisasi yang bergerak dalam bidang 1 Pendidikan Agama / Social Lingkungan atau Dokumen Perijinan resmi dan Dinas/Departemen terkait",
-                      hintText: "Specify",
-                      options: [
-                        "Ya",
-                        "Tidak",
-                      ],
+                          "Melengkapi Akta Pendirian Yayasan organisasi yang bergerak dalam bidang 1 Pendidikan Agama / Sosial Lingkungan atau Dokumen Perijinan resmi dan Dinas/Departemen terkait",
+                      child: CustomRadioButtonns(
+                        hintText: "-",
+                        options: [
+                          "Ya",
+                          "Tidak",
+                        ],
+                      ),
                     ),
                     SizedBox(
                       height: 16,
                     ),
                     CustomRadioContainer(
-                      title: "Jika Bangunan, dilampirkan : ",
+                      title: "17.  Jika Bangunan, dilampirkan : ",
                       child: Container(
                         padding: const EdgeInsets.all(16.0),
                         decoration: BoxDecoration(
@@ -142,7 +146,7 @@ class _SurveyBState extends State<SurveyB> {
                             children: [
                               TextSpan(
                                   text:
-                                      'A. Kepemilikan tanah lahan (SHM, surat hibah/wakaf, SHGB, dll) yang ditandatangani pejabat yang berwenang.\n'),
+                                      'A. Kepemilikan tanah lahan (SHM, surat hibah/wakaf, SHGB, dll) yang ditandatangan pejabat yang berwenang.\n'),
                               TextSpan(
                                   text:
                                       'B. Legalitas untuk pembangunan agar dilengkapi (IMB, Amdal, dll).'),
@@ -155,7 +159,7 @@ class _SurveyBState extends State<SurveyB> {
                     ),
                     SizedBox(height: 16),
                     CustomRadioContainer(
-                      title: "Syarat jika bantuan mobil/motor : ",
+                      title: "18.  Syarat jika bantuan mobil/motor : ",
                       child: Container(
                         padding: const EdgeInsets.all(16.0),
                         decoration: BoxDecoration(
@@ -359,6 +363,54 @@ class _SurveyBState extends State<SurveyB> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildQuestionContainer({
+    required int number,
+    required String title,
+    required Widget child,
+  }) {
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 2,
+            spreadRadius: 2,
+            offset: const Offset(0, 5),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "$number. ", // Number
+                style: darkblueTextStyle.copyWith(
+                    fontSize: 15, fontWeight: FontWeight.w900),
+              ),
+              const SizedBox(width: 4),
+              Expanded(
+                child: Text(
+                  title,
+                  style: darkblueTextStyle.copyWith(
+                      fontSize: 14, fontWeight: FontWeight.w900),
+                  softWrap: true,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          child,
+        ],
       ),
     );
   }

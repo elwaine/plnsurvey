@@ -11,6 +11,8 @@ class _ProfileState extends State<Profile> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _nipController = TextEditingController();
   final TextEditingController _roleController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  String? userImage;
 
   @override
   void initState() {
@@ -19,6 +21,7 @@ class _ProfileState extends State<Profile> {
     _nameController.text = "Aurelia Eka Salsabila"; // User's name
     _nipController.text = "50394224"; // User's NIP
     _roleController.text = "Penyelenggara"; // User's role
+    _passwordController.text = "092u32839"; // User's role
   }
 
   @override
@@ -27,12 +30,16 @@ class _ProfileState extends State<Profile> {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      extendBodyBehindAppBar: true, // Extend the body behind the AppBar
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.transparent, // Transparent AppBar
+        backgroundColor: Color(0xff118A9F),
         elevation: 0, // Remove shadow
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: 32,
+          ),
           onPressed: () => Navigator.pop(context, '/dashboard'),
         ),
       ),
@@ -51,12 +58,12 @@ class _ProfileState extends State<Profile> {
               children: [
                 // Top decorative circle
                 Positioned(
-                  top: -20,
-                  left: 0,
+                  top: 30,
+                  left: 170,
                   child: Image.asset(
-                    'assets/circleataslogin.png',
-                    height: screenHeight * 0.2,
-                    width: screenWidth * 0.5,
+                    'assets/decor_profile.png',
+                    height: screenHeight * 0.25,
+                    width: screenWidth * 0.75,
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -64,9 +71,9 @@ class _ProfileState extends State<Profile> {
                 // Bottom decorative circle
                 Positioned(
                   bottom: -20,
-                  right: -19,
+                  left: -19,
                   child: Image.asset(
-                    'assets/circlebawahlogin.png',
+                    'assets/decor_login.png',
                     height: screenHeight * 0.2,
                     width: screenWidth * 0.6,
                     fit: BoxFit.contain,
@@ -78,8 +85,8 @@ class _ProfileState extends State<Profile> {
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Container(
-                      width: screenWidth * 0.9,
-                      height: screenHeight * 0.52,
+                      width: screenWidth * 0.85,
+                      height: screenHeight * 0.56,
                       margin: EdgeInsets.only(top: screenHeight * 0.01),
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -113,10 +120,10 @@ class _ProfileState extends State<Profile> {
                                           style: blueTextStyle.copyWith(
                                             fontFamily: 'Poppins',
                                             fontWeight: FontWeight.w900,
-                                            fontSize: 23,
+                                            fontSize: 20,
                                           ),
                                         ),
-                                        const SizedBox(height: 5),
+                                        const SizedBox(height: 2),
                                         Text(
                                           _roleController.text,
                                           style: greyTextStyle.copyWith(
@@ -129,7 +136,7 @@ class _ProfileState extends State<Profile> {
                                     ),
                                   ],
                                 ),
-                                const SizedBox(height: 20.0),
+                                const SizedBox(height: 10.0),
 
                                 // NIP Field (non-editable)
                                 _buildNonEditableField(
@@ -142,11 +149,17 @@ class _ProfileState extends State<Profile> {
                                   title: 'Peran',
                                   value: _roleController.text,
                                 ),
+                                const SizedBox(height: 10.0),
+                                _buildNonEditableField(
+                                  title: 'Password',
+                                  value: _passwordController.text,
+                                ),
 
                                 CustomButton(
                                   title: 'Keluar',
                                   onPressed: () {
                                     print("Logged out");
+                                    Navigator.pushNamed(context, '/login-form');
                                   },
                                 ),
                               ],
@@ -174,12 +187,27 @@ class _ProfileState extends State<Profile> {
                 ),
 
                 Positioned(
-                  top: screenHeight * 0.1,
+                  top: screenHeight * 0.09,
                   left: (screenWidth - 130) / 2,
                   child: CircleAvatar(
-                    backgroundColor: const Color.fromARGB(255, 197, 196, 196),
                     radius: 66,
-                    backgroundImage: AssetImage("assets/pfp_placeholder.png"),
+                    backgroundColor: const Color.fromARGB(255, 197, 196, 196),
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          top: -4,
+                          left: -14,
+                          child: SizedBox(
+                            width: 168,
+                            height: 140,
+                            child: Image.asset(
+                              userImage ?? "assets/pfp_placeholder.png",
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -211,7 +239,7 @@ class _ProfileState extends State<Profile> {
           padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
           decoration: BoxDecoration(
             color: Colors.white,
-            border: Border.all(color: Colors.teal, width: 1.7),
+            border: Border.all(color: Color(0xff14A2B8), width: 1.4),
             borderRadius: BorderRadius.circular(15.0),
           ),
           child: Text(

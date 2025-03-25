@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:plnsurvey/ui/widgets/radiobuttonlist.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:plnsurvey/ui/widgets/textfieldcard.dart';
+import 'package:plnsurvey/ui/widgets/textfieldcard_no_title.dart';
 
 class Headerc extends StatelessWidget {
   const Headerc({super.key});
@@ -105,42 +106,55 @@ class _SurveyCState extends State<SurveyC> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Textfieldcard(
+                    _buildQuestionContainer(
+                      number: 19,
                       title: "Jika bantuan mobil/motor atas nama siapa?",
-                      hintText: "Masukkan Jawaban Anda",
-                      child: Container(
-                        padding: const EdgeInsets.all(16.0),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 2,
-                              spreadRadius: 2,
-                              offset: const Offset(0, 5),
+                      child: TextfieldcardNoTitle(
+                        hintText: "-",
+                        child: Container(
+                          padding: const EdgeInsets.all(16.0),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: Colors.black
+                                  .withOpacity(0.2), // Thin border line
+                              width: 0.5, // Adjusted to be very thin
                             ),
-                          ],
-                        ),
-                        child: Text(
-                          "Tidak bisa kepemilikan perorangan Yayasan/Organisasi",
-                          style: darkblueTextStyle.copyWith(
-                            fontFamily: 'Poppins',
-                            fontSize: 14,
-                            fontWeight: black,
-                            height: 2,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.1),
+                                blurRadius: 2,
+                                spreadRadius: 2,
+                                offset: const Offset(0, 5),
+                              ),
+                            ],
+                          ),
+                          child: Text(
+                            "(tidak bisa kepemilikan perorangan) Yayasan/Organisasi",
+                            style: darkblueTextStyle.copyWith(
+                              fontFamily: 'Poppins',
+                              fontSize: 14,
+                              fontWeight: black,
+                              height: 2,
+                            ),
                           ),
                         ),
                       ),
                     ),
                     SizedBox(height: 16),
-                    Textfieldcard(
-                      title: "Syarat jika bantuan mobil/motor : ",
+                    CustomRadioContainer(
+                      title: "20.  Syarat jika bantuan mobil/motor : ",
                       child: Container(
                         padding: const EdgeInsets.all(16.0),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: Colors.black
+                                .withOpacity(0.2), // Thin border line
+                            width: 0.5, // Adjusted to be very thin
+                          ),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black.withOpacity(0.1),
@@ -172,7 +186,8 @@ class _SurveyCState extends State<SurveyC> {
                           ),
                         ),
                       ),
-                      hintText: "Masukkan jawaban anda",
+                      hintText: "-",
+                      options: ["Bersedia", "Tidak bersedia"],
                     ),
                     SizedBox(height: 16),
                     Container(
@@ -180,6 +195,11 @@ class _SurveyCState extends State<SurveyC> {
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color:
+                              Colors.black.withOpacity(0.2), // Thin border line
+                          width: 0.5, // Adjusted to be very thin
+                        ),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black.withOpacity(0.1),
@@ -338,6 +358,53 @@ class _SurveyCState extends State<SurveyC> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildQuestionContainer({
+    required int number,
+    required String title,
+    required Widget child,
+  }) {
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 2,
+            spreadRadius: 2,
+            offset: const Offset(0, 5),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "$number. ", // Number
+                style: darkblueTextStyle.copyWith(
+                    fontSize: 15, fontWeight: FontWeight.w900),
+              ),
+              const SizedBox(width: 4),
+              Expanded(
+                child: Text(
+                  title,
+                  style: darkblueTextStyle.copyWith(
+                      fontSize: 14, fontWeight: FontWeight.w900),
+                  softWrap: true,
+                ),
+              ),
+            ],
+          ),
+          child,
+        ],
       ),
     );
   }

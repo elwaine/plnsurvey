@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:plnsurvey/shared/theme.dart';
 
-class CustomRadioButtonz extends StatefulWidget {
-  final String title;
+class CustomRadioButtonns extends StatefulWidget {
   final String hintText;
   final List<String> options;
   final String? choice;
   final String? extraOptionLabel;
   final ValueChanged<String?>? onChanged;
 
-  const CustomRadioButtonz({
+  const CustomRadioButtonns({
     Key? key,
-    required this.title,
     required this.hintText,
     required this.options,
     this.choice,
@@ -20,10 +18,10 @@ class CustomRadioButtonz extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _CustomRadioButtonzState createState() => _CustomRadioButtonzState();
+  _CustomRadioButtonnsState createState() => _CustomRadioButtonnsState();
 }
 
-class _CustomRadioButtonzState extends State<CustomRadioButtonz> {
+class _CustomRadioButtonnsState extends State<CustomRadioButtonns> {
   String? _selectedOption;
 
   @override
@@ -45,81 +43,57 @@ class _CustomRadioButtonzState extends State<CustomRadioButtonz> {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
 
-    return Container(
-      padding: const EdgeInsets.all(16.0),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 2,
-            spreadRadius: 2,
-            offset: const Offset(0, 5),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            widget.title,
-            style: darkblueTextStyle.copyWith(
-              fontFamily: 'Poppins',
-              fontSize: 15,
-              fontWeight: black,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ...widget.options.map(
+          (option) => Padding(
+            padding: const EdgeInsets.only(bottom: 12.0),
+            child: _buildRadioOption(
+              context,
+              title: option,
+              value: option,
+              screenHeight: screenHeight,
             ),
           ),
-          const SizedBox(height: 16),
-          ...widget.options.map(
-            (option) => Padding(
-              padding: const EdgeInsets.only(bottom: 12.0),
-              child: _buildRadioOption(
-                context,
-                title: option,
-                value: option,
-                screenHeight: screenHeight,
+        ),
+        if (widget.extraOptionLabel != null)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 12.0),
+            child: _buildRadioOption(
+              context,
+              title: widget.extraOptionLabel!,
+              value: "Input Lainnya",
+              screenHeight: screenHeight,
+            ),
+          ),
+        if (_selectedOption == "Input Lainnya")
+          TextFormField(
+            cursorColor: kBlackColor,
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: Color(0xffF2F8F9),
+              contentPadding: const EdgeInsets.symmetric(
+                vertical: 7,
+                horizontal: 12,
               ),
-            ),
-          ),
-          if (widget.extraOptionLabel != null)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 12.0),
-              child: _buildRadioOption(
-                context,
-                title: widget.extraOptionLabel!,
-                value: "Input Lainnya",
-                screenHeight: screenHeight,
+              hintText: widget.hintText,
+              hintStyle: darkblueTextStyle.copyWith(fontSize: 14),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(
+                  color: Colors.transparent,
+                ),
               ),
-            ),
-          if (_selectedOption == "Input Lainnya")
-            TextFormField(
-              cursorColor: kBlackColor,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Color(0xffF2F8F9),
-                contentPadding: const EdgeInsets.symmetric(
-                  vertical: 7,
-                  horizontal: 12,
-                ),
-                hintText: widget.hintText,
-                hintStyle: TextStyle(fontSize: 14),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(
-                    color: Colors.transparent,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(
-                    color: kPrimaryColor,
-                  ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(
+                  color: kPrimaryColor,
                 ),
               ),
             ),
-        ],
-      ),
+          ),
+      ],
     );
   }
 
@@ -146,7 +120,7 @@ class _CustomRadioButtonzState extends State<CustomRadioButtonz> {
                 shape: BoxShape.circle,
                 border: Border.all(
                   color: _selectedOption == value
-                      ? kPrimaryColor // Primary color when selected
+                      ? kPrimaryColor
                       : kSurveyFontColor,
                   width: 2,
                 ),

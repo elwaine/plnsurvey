@@ -260,6 +260,54 @@ class _SurveyE_ApproverState extends State<SurveyE_Approver> {
       ),
     );
   }
+
+  Widget _buildQuestionContainer({
+    required int number,
+    required String title,
+    required Widget child,
+  }) {
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 2,
+            spreadRadius: 2,
+            offset: const Offset(0, 5),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "$number. ", // Number
+                style: darkblueTextStyle.copyWith(
+                    fontSize: 15, fontWeight: FontWeight.w900),
+              ),
+              const SizedBox(width: 4),
+              Expanded(
+                child: Text(
+                  title,
+                  style: darkblueTextStyle.copyWith(
+                      fontSize: 14, fontWeight: FontWeight.w900),
+                  softWrap: true,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          child,
+        ],
+      ),
+    );
+  }
 }
 
 class BackArrowPainter extends CustomPainter {

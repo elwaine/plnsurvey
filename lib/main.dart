@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:plnsurvey/ui/pages/approve-a.dart';
+import 'package:plnsurvey/ui/pages/approve-b.dart';
 import 'package:plnsurvey/ui/pages/dashboard.dart';
 import 'package:plnsurvey/ui/pages/dashboardapprover.dart';
 import 'package:plnsurvey/ui/pages/editpfp.dart';
@@ -30,7 +32,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        '/': (context) => SplashScreen(),
+        '/': (context) => SurveyPage(),
+        // '/': (context) => SplashScreen(),
         '/login-form': (context) => Login(),
         '/dashboard': (context) => SurveyDashboard(),
         '/profile': (context) => Profile(),
@@ -40,7 +43,7 @@ class MyApp extends StatelessWidget {
         '/surveyd': (context) => SurveyD(),
         '/surveye': (context) => SurveyE(),
         '/surveye-approver': (context) => SurveyE_Approver(),
-        '/surveya': (context) => SurveyPage(),
+        // '/surveya': (context) => SurveyPage(),
         '/hasilsurveya': (context) => HasilSurveyA(),
         '/hasilsurveyb': (context) => HasilSurveyB(),
         '/hasilsurveyc': (context) => HasilSurveyC(),
