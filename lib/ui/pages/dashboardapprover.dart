@@ -197,7 +197,7 @@ class SurveyDashboardApprover extends StatelessWidget {
                     height: 30,
                   ),
                   onPressed: () {
-                    // Add logic here
+                    Navigator.pushNamed(context, '/hasilsurveya');
                   },
                 ),
               ),
@@ -210,7 +210,7 @@ class SurveyDashboardApprover extends StatelessWidget {
                     height: 30,
                   ),
                   onPressed: () {
-                    // Add logic here
+                    Navigator.pushNamed(context, '/surveya');
                   },
                 ),
               ),

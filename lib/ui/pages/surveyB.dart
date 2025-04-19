@@ -343,7 +343,7 @@ class _SurveyBState extends State<SurveyB> {
                     height: 24,
                   ),
                   onPressed: () {
-                    // Add logic here
+                    Navigator.pushNamed(context, '/hasilsurveya');
                   },
                 ),
               ),
@@ -356,7 +356,7 @@ class _SurveyBState extends State<SurveyB> {
                     height: 24,
                   ),
                   onPressed: () {
-                    // Add logic here
+                    Navigator.pushNamed(context, '/surveya');
                   },
                 ),
               ),

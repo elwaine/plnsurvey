@@ -338,7 +338,7 @@ class _SurveyCState extends State<SurveyC> {
                     height: 24,
                   ),
                   onPressed: () {
-                    // Add logic here
+                    Navigator.pushNamed(context, '/hasilsurveya');
                   },
                 ),
               ),
@@ -351,7 +351,7 @@ class _SurveyCState extends State<SurveyC> {
                     height: 24,
                   ),
                   onPressed: () {
-                    // Add logic here
+                    Navigator.pushNamed(context, '/surveya');
                   },
                 ),
               ),

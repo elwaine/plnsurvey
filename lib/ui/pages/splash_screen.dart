@@ -9,7 +9,7 @@ class HalfCircleClipper extends CustomClipper<Path> {
     path.moveTo(0, size.height * 0.7);
     path.quadraticBezierTo(
       size.width / 2,
-      size.height * 1.2,
+      size.height * 1.0,
       size.width,
       size.height * 0.72,
     );
@@ -54,17 +54,17 @@ class _SplashScreenState extends State<SplashScreen> {
               gradient: kPrimaryBackground,
             ),
           ),
-          // Positioned(
-          //   top: screenHeight * 0.52,
-          //   left: screenWidth * 0.09,
-          //   child: SizedBox(
-          //     width: screenWidth * 0.9,
-          //     child: Image.asset(
-          //       'assets/tianglistrik_v2.png',
-          //       fit: BoxFit.fill,
-          //     ),
-          //   ),
-          // ),
+          Positioned(
+            top: screenHeight * 0.57,
+            left: screenWidth * 0.3,
+            child: SizedBox(
+              width: screenWidth * 0.9,
+              child: Image.asset(
+                'assets/tianglistrik_v2.png',
+                fit: BoxFit.fill,
+              ),
+            ),
+          ),
           ClipPath(
             clipper: HalfCircleClipper(),
             child: Container(
@@ -74,7 +74,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
           ),
           Positioned(
-            top: screenHeight * 0.56,
+            top: screenHeight * 0.45,
             left: screenWidth * 0.15,
             child: SizedBox(
               width: screenWidth * 0.85,
@@ -109,11 +109,11 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
           Positioned(
             top: screenHeight * 0.68,
-            left: screenWidth * 0.3,
+            right: screenWidth * 0.4,
             child: SizedBox(
-              width: screenWidth * 0.7,
+              width: screenWidth * 0.6,
               child: Image.asset(
-                'assets/bungapln.png',
+                'assets/bungapln1.png',
                 fit: BoxFit.contain,
               ),
             ),

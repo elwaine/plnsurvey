@@ -738,7 +738,7 @@ class _SurveyPageState extends State<SurveyPage> {
                     height: 24,
                   ),
                   onPressed: () {
-                    // Add logic here
+                    Navigator.pushNamed(context, '/hasilsurveya');
                   },
                 ),
               ),
@@ -751,7 +751,7 @@ class _SurveyPageState extends State<SurveyPage> {
                     height: 24,
                   ),
                   onPressed: () {
-                    // Add logic here
+                    Navigator.pushNamed(context, '/surveya');
                   },
                 ),
               ),

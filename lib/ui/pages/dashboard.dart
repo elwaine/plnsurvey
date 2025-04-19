@@ -51,7 +51,7 @@ class SurveyDashboard extends StatelessWidget {
                   RecentlyViewedCard(),
                   SizedBox(height: 30),
                   Padding(
-                    padding: EdgeInsets.only(left: 16), // Left padding only
+                    padding: EdgeInsets.only(left: 16),
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
@@ -151,7 +151,7 @@ class SurveyDashboard extends StatelessWidget {
         borderRadius: BorderRadius.circular(50),
         child: Container(
           height: screenHeight * 0.1,
-          width: screenWidth * 0.2,
+          width: screenWidth * 0.22,
           decoration: BoxDecoration(
             color: Colors.white,
             shape: BoxShape.circle,
@@ -210,7 +210,7 @@ class SurveyDashboard extends StatelessWidget {
                     height: 30,
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/approve-a');
+                    Navigator.pushNamed(context, '/surveya');
                   },
                 ),
               ),
